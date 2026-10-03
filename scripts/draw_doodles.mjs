@@ -11,6 +11,7 @@ import { extraDoodles } from "./doodles_pf_shaun.mjs";
 import { gameDoodles } from "./doodles_games.mjs";
 import { streetDoodles } from "./doodles_street.mjs";
 import { cryptoDoodles } from "./doodles_crypto.mjs";
+import { logoDoodles } from "./doodles_logos.mjs";
 
 const TEAL = "#2FB3A8", TEAL_DARK = "#24918A";
 const ORANGE = "#F39A3A";
@@ -128,7 +129,7 @@ const drawings = {
     ${dots}`];
 }
 
-Object.assign(drawings, extraDoodles, gameDoodles, streetDoodles, cryptoDoodles);
+Object.assign(drawings, extraDoodles, gameDoodles, streetDoodles, cryptoDoodles, logoDoodles);
 
 const only = process.argv.slice(2);
 fs.mkdirSync("raw_art/childhood", { recursive: true });

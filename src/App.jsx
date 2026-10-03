@@ -1,12 +1,12 @@
 import { useState } from "react";
 import Experience from "./Experience/Experience";
-import IntroScreen from "./components/IntroScreen";
+import NotebookIntro from "./components/NotebookIntro";
 
 export default function App() {
   const [ready, setReady] = useState(false);
   return (
     <>
-      <IntroScreen ready={ready} />
+      <NotebookIntro ready={ready} />
       <Experience onReady={() => setReady(true)} />
     </>
   );

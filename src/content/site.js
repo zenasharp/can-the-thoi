@@ -149,7 +149,8 @@ export const scenes = [
     greeting: "One more game, then sleep.",
     width: 30, // two and a half pages
     ground: 1.0,
-    strips: { back: "#A8CC92", mid: "#98C283", front: "#A8CC92", grooveB: "#8FC3DE" }, // groove B is the river
+    // Summoner's Rift: grass, a dirt lane down the middle, and groove B is the river
+    strips: { back: "#A8CC92", mid: "#D3BC92", front: "#A8CC92", grooveB: "#8FC3DE" },
     wall: {
       text: { body: "After school = LoL.\nBefore school = Moly.\nWeekends = Gunny.\nSleep = optional.\n\nmain: Teemo (sorry not sorry)", x: 0.2, y: 1.0, size: 0.26 },
     },
@@ -195,6 +196,7 @@ export const scenes = [
     greeting: "Trà đá is a personality.",
     width: 30, // two and a half pages
     ground: 1.4,
+    // pavements either side of the road
     strips: { back: "#EBC6B2", mid: "#BEBBB4", front: "#EBC6B2", grooveB: "#8F8C86" },
     roadDashes: true,
     wall: {
@@ -232,6 +234,8 @@ export const scenes = [
       { type: "powerLines", x: 3.4, poles: [0, 8.4, 16.2, 21.2], loaAt: 1, birdsOn: 1, houseDrops: [[0, 1.5, 3.1], [1, -1.3, 3.3], [3, -1.4, 3.0]] },
       // bia vỉa hè: a sidewalk beer table, the glasses clink "DZÔ!" as I pass
       { type: "beerTable", x: 19.4 },
+      // boy phố: Phineas and Ferb tearing past on one wheel, a spear sparking on the road
+      { type: "boyPho", x: 12.5 },
       // graduation: the school gate opens and hands me over to adult life
       { type: "schoolGate", x: 27.6 },
     ],
@@ -251,6 +255,9 @@ export const scenes = [
     strips: { back: "#7DB4DA", mid: "#6AA3CF", front: "#5E97C6", grooveB: "#4C84B6" },
     wall: {
       text: { body: "Crypto degen by day,\nmusic by night.\n\nWE'RE GONNA MAKE IT!!\n(not financial advice)", x: 0.2, y: 1.15, size: 0.26 },
+      // the wall darkens as the sea does, deepest under the tangle of thoughts,
+      // and clears as my wing grows and I fly up into the sky
+      gloom: [[0, 0], [10, 0.04], [20, 0.12], [28, 0.24], [36, 0.34], [44, 0.42], [48.6, 0.45], [51.5, 0.12], [54, 0]],
       // the dark half: what goes round in my head, scribbled on the wall
       extra: [
         { body: "-87%", x: 29.5, y: 3.1, size: 0.44, color: "#B8322A", tilt: -0.08 },
@@ -265,6 +272,14 @@ export const scenes = [
       // euphoria: the pump.fun pill bobbing on the water, and a buoy of wisdom
       { art: "crypto/pill", x: 3.6, z: "front", h: 0.75, anim: "float" },
       { art: "crypto/buoy_nfa", x: 21.5, z: "front", h: 0.95, anim: "float" },
+      // grown-up life: the work tools I live in, little things bobbing half sunk like the pill, right at the start
+      { art: "crypto/logo_vscode", x: 2.4, y: 0.12, z: "back", dz: 0.25, h: 0.62, anim: "float", tilt: -0.12 },
+      { art: "crypto/logo_figma", x: 5.4, y: 0.05, z: "front", h: 0.62, anim: "float", tilt: 0.16 },
+      { art: "crypto/logo_after_effects", x: 8.6, y: 0.05, z: "front", h: 0.55, anim: "float", tilt: 0.2 },
+      { art: "crypto/logo_blender", x: 10.4, y: 0.12, z: "back", dz: 0.25, h: 0.55, anim: "float", tilt: 0.1 },
+      { art: "crypto/logo_claude", x: 12.2, y: 0.05, z: "front", h: 0.58, anim: "float", tilt: -0.14 },
+      // the end of the sea: a lotus in bloom where the sunbeams land
+      { art: "crypto/lotus", x: 52.2, y: 0.12, z: "front", h: 1.25, anim: "float" },
       // the hangover: the NFT that sinks as I pass, a buoy of hope
       { art: "crypto/nft_ape", x: 27.0, z: "back", dz: 0.2, h: 1.25, anim: "rise", rise: -1.0, riseSpan: 2.5 },
       { art: "crypto/buoy_wagmi", x: 44.5, z: "back", dz: 0.3, h: 1.0, anim: "float" },

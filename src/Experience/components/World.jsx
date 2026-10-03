@@ -2,7 +2,7 @@ import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { GRID_TILE, GROOVE_DEPTH, LIP_DROP, SLOT_Z, STRIPS, WALL_Z } from "../layout";
-import { HAND, MARGIN_CELLS, contactShadow, gridPaper, handwriting, marginStrip, roadDashes, stickyNote, toTexture, whenFont } from "../textures";
+import { HAND, MARGIN_CELLS, contactShadow, gridPaper, groundPaper, handwriting, marginStrip, roadDashes, stickyNote, toTexture, whenFont } from "../textures";
 import PaperCutout, { Art, Card, Stick } from "./PaperCutout";
 import { STRUCTURES } from "./Structures";
 import { EVENTS } from "./Events";
@@ -51,11 +51,11 @@ export function PaperWall({ x0, x1, margins = [] }) {
   }, [h]);
   return (
     <group position={[(x0 + x1) / 2, WALL_BOTTOM + h / 2, WALL_Z]}>
-      <mesh material={material}>
+      <mesh name="paperWall" material={material}>
         <planeGeometry args={[w, h]} />
       </mesh>
       {margins.map((x, i) => (
-        <mesh key={i} position={[snapToLine(x) - (x0 + x1) / 2, 0, 0.001]} material={marginMaterial}>
+        <mesh key={i} name="paperMargin" position={[snapToLine(x) - (x0 + x1) / 2, 0, 0.001]} material={marginMaterial}>
           <planeGeometry args={[MARGIN_W, h]} />
         </mesh>
       ))}
@@ -68,26 +68,31 @@ export function PaperWall({ x0, x1, margins = [] }) {
 
 // --- ground -----------------------------------------------------------------
 
+// `shade`: one shade for the face, or [foot, top] to darken it towards its foot (the sides,
+// lit from above), by height between y0 and y1
+let foot = [0, 1];
 const quad = (pos, uv, col, a, b, c, d, ua, ub, uc, ud, shade) => {
   for (const [p, u] of [[a, ua], [b, ub], [c, uc], [a, ua], [c, uc], [d, ud]]) {
     pos.push(...p);
     uv.push(...u);
-    col.push(shade, shade, shade);
+    const k = Array.isArray(shade) ? shade[0] + (shade[1] - shade[0]) * Math.min(1, Math.max(0, (p[1] - foot[0]) / (foot[1] - foot[0]))) : shade;
+    col.push(k, k, k);
   }
 };
 
 /** Box without a bottom face; world-space UVs so the notebook rules line up across strips. */
 function paperBox(x0, x1, y0, y1, z0, z1) {
   const pos = [], uv = [], col = [];
+  foot = [Math.max(y0, y1 - 2.2), y1]; // the shading runs over the top 2.2 units
   const U = (v) => v / UV_UNIT;
   // top: rules run front-to-back (constant x)
   quad(pos, uv, col, [x0, y1, z1], [x1, y1, z1], [x1, y1, z0], [x0, y1, z0], [U(z1), U(x0)], [U(z1), U(x1)], [U(z0), U(x1)], [U(z0), U(x0)], 1);
   // front (+z) and back (-z): vertical rules
-  quad(pos, uv, col, [x0, y0, z1], [x1, y0, z1], [x1, y1, z1], [x0, y1, z1], [U(y0), U(x0)], [U(y0), U(x1)], [U(y1), U(x1)], [U(y1), U(x0)], 0.8);
-  quad(pos, uv, col, [x1, y0, z0], [x0, y0, z0], [x0, y1, z0], [x1, y1, z0], [U(y0), U(x1)], [U(y0), U(x0)], [U(y1), U(x0)], [U(y1), U(x1)], 0.68);
+  quad(pos, uv, col, [x0, y0, z1], [x1, y0, z1], [x1, y1, z1], [x0, y1, z1], [U(y0), U(x0)], [U(y0), U(x1)], [U(y1), U(x1)], [U(y1), U(x0)], [0.62, 0.86]);
+  quad(pos, uv, col, [x1, y0, z0], [x0, y0, z0], [x0, y1, z0], [x1, y1, z0], [U(y0), U(x1)], [U(y0), U(x0)], [U(y1), U(x0)], [U(y1), U(x1)], [0.52, 0.74]);
   // sides
-  quad(pos, uv, col, [x1, y0, z1], [x1, y0, z0], [x1, y1, z0], [x1, y1, z1], [U(y0), U(z1)], [U(y0), U(z0)], [U(y1), U(z0)], [U(y1), U(z1)], 0.84);
-  quad(pos, uv, col, [x0, y0, z0], [x0, y0, z1], [x0, y1, z1], [x0, y1, z0], [U(y0), U(z0)], [U(y0), U(z1)], [U(y1), U(z1)], [U(y1), U(z0)], 0.84);
+  quad(pos, uv, col, [x1, y0, z1], [x1, y0, z0], [x1, y1, z0], [x1, y1, z1], [U(y0), U(z1)], [U(y0), U(z0)], [U(y1), U(z0)], [U(y1), U(z1)], [0.66, 0.88]);
+  quad(pos, uv, col, [x0, y0, z0], [x0, y0, z1], [x0, y1, z1], [x0, y1, z0], [U(y0), U(z0)], [U(y0), U(z1)], [U(y1), U(z1)], [U(y1), U(z0)], [0.66, 0.88]);
   return finish(pos, uv, col);
 }
 
@@ -98,8 +103,9 @@ function lipGeometry(x0, x1, g) {
   const yb = g - LIP_DROP;
   const U = (v) => v / UV_UNIT;
   const slope = Math.hypot(z1 - z0, LIP_DROP);
+  foot = [Math.max(BOTTOM, yb - 2.2), yb];
   quad(pos, uv, col, [x0, yb, z1], [x1, yb, z1], [x1, g, z0], [x0, g, z0], [0, U(x0)], [0, U(x1)], [U(slope), U(x1)], [U(slope), U(x0)], 0.95);
-  quad(pos, uv, col, [x0, BOTTOM, z1], [x1, BOTTOM, z1], [x1, yb, z1], [x0, yb, z1], [U(BOTTOM), U(x0)], [U(BOTTOM), U(x1)], [U(yb), U(x1)], [U(yb), U(x0)], 0.86);
+  quad(pos, uv, col, [x0, BOTTOM, z1], [x1, BOTTOM, z1], [x1, yb, z1], [x0, yb, z1], [U(BOTTOM), U(x0)], [U(BOTTOM), U(x1)], [U(yb), U(x1)], [U(yb), U(x0)], [0.62, 0.88]);
   // side triangles closing the lip
   for (const [x, s] of [[x0, 1], [x1, -1]]) {
     const tri = s > 0 ? [[x, g, z0], [x, yb, z1], [x, BOTTOM, z1], [x, g, z0], [x, BOTTOM, z1], [x, BOTTOM, z0]] : [[x, g, z0], [x, BOTTOM, z1], [x, yb, z1], [x, g, z0], [x, BOTTOM, z0], [x, BOTTOM, z1]];
@@ -117,15 +123,18 @@ function finish(pos, uv, col) {
   return g;
 }
 
+// hand-coloured ground paper (textures.js groundPaper): one texture per colour,
+// shared; a groove reuses its neighbour's, dimmed by the material colour
+const groundMaps = new Map();
 const paperMaterials = new Map();
-function paperMaterial(color) {
-  if (!paperMaterials.has(color)) {
-    const map = gridPaper({ tint: color, contrast: 0.7, size: 512, seed: color.length * 13 });
-    paperMaterials.set(color, new THREE.MeshBasicMaterial({ map, vertexColors: true, side: THREE.DoubleSide }));
+function paperMaterial(color, dim = 1) {
+  const key = `${color}|${dim}`;
+  if (!paperMaterials.has(key)) {
+    if (!groundMaps.has(color)) groundMaps.set(color, groundPaper(color));
+    paperMaterials.set(key, new THREE.MeshBasicMaterial({ map: groundMaps.get(color), color: new THREE.Color(dim, dim, dim), vertexColors: true, side: THREE.DoubleSide }));
   }
-  return paperMaterials.get(color);
+  return paperMaterials.get(key);
 }
-const darker = (hex, k) => `#${new THREE.Color(hex).multiplyScalar(k).getHexString()}`;
 
 /**
  * The stage a scene stands on, with Mr. Panda's measured profile plus a second
@@ -136,13 +145,13 @@ export function Ground({ x0, x1, height: g, strips, roadDashes: dashes }) {
     const back = strips.back, mid = strips.mid || back, front = strips.front || back;
     const list = [
       { geo: paperBox(x0, x1, BOTTOM, g, ...STRIPS.back), color: back },
-      { geo: paperBox(x0, x1, BOTTOM, g - GROOVE_DEPTH.grooveA, ...STRIPS.grooveA), color: strips.grooveA || darker(back, 0.62) },
+      { geo: paperBox(x0, x1, BOTTOM, g - GROOVE_DEPTH.grooveA, ...STRIPS.grooveA), color: strips.grooveA || back, dim: strips.grooveA ? 1 : 0.62 },
       { geo: paperBox(x0, x1, BOTTOM, g, ...STRIPS.mid), color: mid },
-      { geo: paperBox(x0, x1, BOTTOM, g - GROOVE_DEPTH.grooveB, ...STRIPS.grooveB), color: strips.grooveB || darker(mid, 0.66) },
+      { geo: paperBox(x0, x1, BOTTOM, g - GROOVE_DEPTH.grooveB, ...STRIPS.grooveB), color: strips.grooveB || mid, dim: strips.grooveB ? 1 : 0.66 },
       { geo: paperBox(x0, x1, BOTTOM, g, ...STRIPS.front), color: front },
       { geo: lipGeometry(x0, x1, g), color: front },
     ];
-    return list.map((p) => ({ ...p, material: paperMaterial(p.color) }));
+    return list.map((p) => ({ ...p, material: paperMaterial(p.color, p.dim) }));
   }, [x0, x1, g, strips]);
   const fade = useMemo(() => contactShadow(x1 - x0), [x0, x1]);
   const dashMaterial = useMemo(() => {
@@ -171,6 +180,42 @@ export function Ground({ x0, x1, height: g, strips, roadDashes: dashes }) {
         </mesh>
       )}
     </group>
+  );
+}
+
+// --- the wall's mood -----------------------------------------------------------
+
+/**
+ * A shade laid over the wall that deepens along a scene (wall.gloom: [[x, alpha],
+ * ...] in scene x), a little lighter towards the foot of the wall: the light
+ * going out of the day. Wall writing and everything standing in front stays
+ * as it is.
+ */
+function WallGloom({ x0, x1, stops, color = "#151a2c" }) {
+  const material = useMemo(() => {
+    const W = 512, H = 64, w = x1 - x0;
+    const c = document.createElement("canvas");
+    c.width = W;
+    c.height = H;
+    const ctx = c.getContext("2d");
+    const g = ctx.createLinearGradient(0, 0, W, 0);
+    for (const [x, a] of stops) {
+      const v = Math.round(255 * a);
+      g.addColorStop(Math.min(1, Math.max(0, x / w)), `rgb(${v},${v},${v})`);
+    }
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+    const foot = ctx.createLinearGradient(0, 0, 0, H); // the image's foot is the wall's foot
+    foot.addColorStop(0, "rgba(0,0,0,0)");
+    foot.addColorStop(1, "rgba(0,0,0,0.3)");
+    ctx.fillStyle = foot;
+    ctx.fillRect(0, 0, W, H);
+    return new THREE.MeshBasicMaterial({ color, alphaMap: new THREE.CanvasTexture(c), transparent: true, depthWrite: false });
+  }, [x0, x1, stops, color]);
+  return (
+    <mesh position={[(x0 + x1) / 2, (WALL_BOTTOM + WALL_TOP) / 2, WALL_Z + 0.004]} material={material}>
+      <planeGeometry args={[x1 - x0, WALL_TOP - WALL_BOTTOM]} />
+    </mesh>
   );
 }
 
@@ -283,6 +328,7 @@ export function PaperScene({ scene }) {
   return (
     <group>
       <Ground x0={scene.x0} x1={scene.x1} height={g} strips={scene.strips} roadDashes={scene.roadDashes} />
+      {w.gloom && <WallGloom x0={scene.x0} x1={scene.x1} stops={w.gloom} />}
       {w.sticky && <StickyNote {...w.sticky} x={scene.x0 + w.sticky.x} y={g + w.sticky.y} />}
       {w.text && <WallText {...w.text} x={scene.x0 + w.text.x} y={g + w.text.y} />}
       {(w.extra || []).map((t, i) => <WallText key={i} {...t} x={scene.x0 + t.x} y={g + t.y} />)}

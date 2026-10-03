@@ -183,6 +183,46 @@ const buoy = (lines, size, signFill) => [380, 560, `
   <path d="M90 426 Q190 392 290 426 L294 448 Q190 414 86 448 Z" fill="#FFFFFF" stroke-width="9"/>
   <path d="M40 520 Q90 496 140 520 Q190 544 240 520 Q290 496 340 520" fill="none" stroke="#FFFFFF" stroke-width="12"/>`];
 
+// --- the lotus at the end of the sea, where the sunbeams land ----------------------------------
+// Seen from the side, a little from above: a cup of pointed petals in three rows
+// (back, middle, front) and two drooping low ones, each a lens shape with a
+// deeper pink tip and a vein, the yellow heart showing between them, on two
+// flat lily pads; a closed bud on its stem beside it.
+const lotus = (() => {
+  const petal = (bx, by, deg, len, wid, fill) => {
+    const h = len, w = wid;
+    return `<g transform="translate(${bx} ${by}) rotate(${deg})">
+      <path d="M0 0 Q${-w} ${-h * 0.5} 0 ${-h} Q${w} ${-h * 0.5} 0 0 Z" fill="${fill}"/>
+      <path d="M0 ${-h * 0.6} Q${-w * 0.5} ${-h * 0.8} 0 ${-h} Q${w * 0.5} ${-h * 0.8} 0 ${-h * 0.6} Z" fill="#EC6F9A" stroke="none"/>
+      <path d="M0 ${-h * 0.12} L0 ${-h * 0.72}" fill="none" stroke="#D9638A" stroke-width="6"/>
+    </g>`;
+  };
+  const pad = (cx, cy, rx, ry, notch) => `
+    <path d="M${cx} ${cy} L${cx + notch * rx * 0.95} ${cy - ry * 0.3} A${rx} ${ry} 0 1 ${notch > 0 ? 0 : 1} ${cx + notch * rx * 0.95} ${cy + ry * 0.3} Z" fill="#4F9A5B"/>
+    <ellipse cx="${cx}" cy="${cy}" rx="${rx * 0.62}" ry="${ry * 0.55}" fill="#6DBB72" stroke="none"/>
+    ${[-0.8, -0.35, 0.2, 0.7].map((t) => `<path d="M${cx} ${cy} L${cx + Math.cos(t * 3.1) * rx * 0.85} ${cy + Math.sin(t * 3.1) * ry * 0.8}" fill="none" stroke="#3A7A45" stroke-width="6"/>`).join("")}`;
+  const X = 450, Y = 560; // where the petals spring from
+  return [900, 720, `
+    ${pad(300, 640, 250, 58, 1)}
+    ${pad(660, 662, 200, 46, -1)}
+    <!-- the bud on its stem -->
+    <path d="M700 650 Q690 520 735 400" fill="none" stroke="#151515" stroke-width="30"/>
+    <path d="M700 650 Q690 520 735 400" fill="none" stroke="#4F9A5B" stroke-width="13"/>
+    ${petal(735, 410, 12, 150, 52, "#F49AB8")}
+    <!-- back row, middle row -->
+    ${[-32, -13, 8, 27].map((a, i) => petal(X - 18 + i * 12, Y, a, 300, 72, "#F8C9D8")).join("")}
+    ${[-18, 0, 17].map((a, i) => petal(X - 12 + i * 12, Y, a, 322, 82, "#F6B3C8")).join("")}
+    <!-- the yellow heart between the petals -->
+    <ellipse cx="${X}" cy="${Y - 92}" rx="58" ry="24" fill="#F6C21A"/>
+    <!-- low petals drooping over the pads, then the front row -->
+    ${petal(X - 30, Y + 10, -100, 210, 62, "#F7B0C6")}
+    ${petal(X + 30, Y + 10, 102, 210, 62, "#F7B0C6")}
+    ${petal(X - 16, Y + 6, -62, 285, 80, "#F49AB8")}
+    ${petal(X + 16, Y + 6, 64, 285, 80, "#F49AB8")}
+    ${petal(X - 8, Y + 8, -28, 255, 92, "#F7A6C0")}
+    ${petal(X + 8, Y + 8, 27, 255, 92, "#F7A6C0")}`];
+})();
+
 // --- sunbeams breaking through the clouds at the very end ---------------------------------------
 const godRays = [1000, 1000, `
   ${[[-0.55, -0.42], [-0.26, -0.15], [0.0, 0.1], [0.26, 0.37], [0.52, 0.62]].map(([a, b], i) => {
@@ -237,7 +277,7 @@ const dharmaWheel = (() => {
 
 // --- puffs kicked up behind a runner: three scribbled dust clouds (pale, pencil
 // outline, a few specks) and three sea-spray versions (white, blue outline)
-const puff = (fill, ink, speck, k) => {
+export const puff = (fill, ink, speck, k) => {
   const n = 7 + k;
   const pts = Array.from({ length: n }, (_, i) => {
     const a = (i / n) * Math.PI * 2;
@@ -292,4 +332,5 @@ export const cryptoDoodles = {
   "crypto/buoy_nfa": buoy(["NOT", "FINANCIAL", "ADVICE"], 40, "#FFFFFF"),
   "crypto/buoy_wagmi": buoy(["WAGMI?"], 66, "#FFF3A8"),
   "crypto/god_rays": godRays,
+  "crypto/lotus": lotus,
 };

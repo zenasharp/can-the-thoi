@@ -1,5 +1,6 @@
 // Hand-coded SVG doodles for the Vietnamese street scene, used by draw_doodles.mjs.
 import { INK, limb } from "./wobble.mjs";
+import { puff } from "./doodles_crypto.mjs";
 
 // A sparrow sitting on the wire (side view, facing right) and the same bird
 // flapping away (wings up): the two frames of its flip-book.
@@ -55,7 +56,26 @@ const dieuCay = [300, 1000, `
   <ellipse cx="259" cy="612" rx="27" ry="8" fill="#2A1A0E" stroke-width="8"/>
   <rect x="96" y="930" width="98" height="40" rx="12" fill="#A47E3A"/>`];
 
+// --- the boy phố's blade scraping the road: scribbled sparks (three variants); the
+// grey smoke from the exhaust is the dust puff, in grey
+const spark = (k) => {
+  const n = 5 + k, pts = [];
+  for (let i = 0; i < n * 2; i++) {
+    const a = (i / (n * 2)) * Math.PI * 2 + k * 0.4;
+    const r = i % 2 ? 26 + k * 4 : 78 + ((i * 37) % 3) * 12;
+    pts.push(`${(100 + Math.cos(a) * r).toFixed(0)} ${(100 + Math.sin(a) * r).toFixed(0)}`);
+  }
+  return [200, 200, `<path d="M${pts.join(" L")} Z" fill="#FFD23F" stroke-width="11"/>
+    <circle cx="100" cy="100" r="${16 + k * 2}" fill="#FF8A1F" stroke="none"/>`, { transparent: true, seed: 5 + k }];
+};
+
 export const streetDoodles = {
+  "street/spark_1": spark(0),
+  "street/spark_2": spark(1),
+  "street/spark_3": spark(2),
+  "street/smoke_1": puff("#E4E4E4", "#6E6E6E", "#CFCFCF", 0),
+  "street/smoke_2": puff("#E4E4E4", "#6E6E6E", "#CFCFCF", 1),
+  "street/smoke_3": puff("#E4E4E4", "#6E6E6E", "#CFCFCF", 2),
   "street/dieu_cay": dieuCay,
   "street/beer_glass": beerGlass,
   "street/ad_khoan": adSlip(330, 200, "#FFFFFF", [["KHOAN CẮT", 46, 62], ["BÊ TÔNG", 46, 114]], "090x.xxx.xxx", "#D6392B"),

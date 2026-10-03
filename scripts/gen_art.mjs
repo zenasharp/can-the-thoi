@@ -31,9 +31,10 @@ const run = ([key, spec]) =>
     const out = path.join("raw_art", `${key}.png`);
     fs.mkdirSync(path.dirname(out), { recursive: true });
     // spec.subjectRef: an image showing WHAT to draw, attached first; spec.refs / refs:
-    // the artist's drawings showing HOW to draw it; spec.prompt replaces everything.
+    // the artist's drawings showing HOW to draw it; spec.note: extra words on the refs;
+    // spec.prompt replaces everything.
     const subjectNote = spec.subjectRef ? " The FIRST attached image only shows WHAT the subject looks like (shape, colours, key features): do NOT copy its rendering, shading or detail. The other attached images are the artist's own drawings and show HOW to draw it." : "";
-    const prompt = spec.prompt || `${style}${subjectNote} Subject: ${spec.subject}.${spec.text ? ` Text (verbatim, hand-lettered): "${spec.text}".` : ""}`;
+    const prompt = spec.prompt || `${style}${subjectNote}${spec.note ? " " + spec.note : ""} Subject: ${spec.subject}.${spec.text ? ` Text (verbatim, hand-lettered): "${spec.text}".` : ""}`;
     const refArgs = [...(spec.subjectRef ? [spec.subjectRef] : []), ...(spec.refs || refs)].flatMap((r) => ["--image", r]);
     const p = spawn("node", [SKILL, "edit", "--prompt", prompt, ...refArgs, "--size", spec.size || "1024x1024", "--quality", quality, "--out", out]);
     let err = "";

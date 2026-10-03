@@ -177,7 +177,7 @@ function CutoutBody({ item, base, texture, ratio, shapes, strings }) {
       }
       case "float":
         o.position.y = Math.sin(t * 1.3) * 0.12;
-        o.rotation.z = Math.sin(t * 0.7) * 0.07;
+        o.rotation.z = (item.tilt || 0) + Math.sin(t * 0.7) * 0.07; // tilt: lies at an angle, like flotsam
         break;
       case "glide": { // a big flyer drifting to and fro over the scene (glide: x range),
         // turning round like a paper puppet at each end; the art faces left

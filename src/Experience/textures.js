@@ -219,10 +219,10 @@ export function paperNote(text, { size = 0.2, worldHeight } = {}) {
  * a faint halo plus a core, slightly blurred, its strength wavering along the
  * line, with paper grain on top. `tint` multiplies the paper (coloured ground
  * strips); `contrast` scales the ink. `cols` / `vertical` let callers draw a
- * narrower strip with horizontal rules only (the red-margin strip).
+ * narrower strip with horizontal rules only (the red-margin strip); `cells`
+ * (16 per tile) lets one texture span several tiles.
  */
-export function gridPaper({ tint = null, contrast = 1, size = 1024, seed = 5, cols = 16, vertical = true, draw } = {}) {
-  const cells = 16;
+export function gridPaper({ tint = null, contrast = 1, size = 1024, seed = 5, cells = 16, cols = cells, vertical = true, draw } = {}) {
   const step = size / cells;
   const cw = Math.round(step * cols);
   const pad = Math.round(step); // drawn wider than the tile so the blur wraps cleanly
@@ -251,10 +251,10 @@ export function gridPaper({ tint = null, contrast = 1, size = 1024, seed = 5, co
   const minor = ["150,170,228", 0.42 * contrast, 2.5];
   const major = ["98,112,205", 0.68 * contrast, 4];
   const style = (i) => ((((i % 4) + 4) % 4) === 0 ? major : minor);
-  for (let i = -1; i <= cells; i++) {
+  for (let i = -1; i <= Math.max(cells, cols); i++) {
     const [rgb, alpha, width] = style(i);
-    drawLine(i * step, false, width, rgb, alpha, i + 11);
-    if (vertical) drawLine(i * step, true, width, rgb, alpha, i + 3);
+    if (i <= cells) drawLine(i * step, false, width, rgb, alpha, i + 11);
+    if (vertical && i <= cols) drawLine(i * step, true, width, rgb, alpha, i + 3);
   }
 
   // 2) paper, then the blurred ink, then grain over everything
@@ -270,7 +270,7 @@ export function gridPaper({ tint = null, contrast = 1, size = 1024, seed = 5, co
     ctx.fillRect(0, 0, cw, size);
     ctx.globalCompositeOperation = "source-over";
   }
-  ctx.filter = `blur(${(size / 1024) * 2}px)`;
+  ctx.filter = `blur(${step / 32}px)`;
   ctx.drawImage(ink, -pad, -pad);
   ctx.filter = "none";
   draw?.(ctx, cw, size);
@@ -279,6 +279,81 @@ export function gridPaper({ tint = null, contrast = 1, size = 1024, seed = 5, co
   t.wrapS = t.wrapT = THREE.RepeatWrapping;
   t.anisotropy = 8;
   return t;
+}
+
+// --- hand-coloured ground ---------------------------------------------------
+
+const hexRgb = (hex) => { const n = parseInt(hex.slice(1), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
+const rgbHex = (c) => `#${c.map((v) => Math.round(Math.min(255, Math.max(0, v))).toString(16).padStart(2, "0")).join("")}`;
+/** a towards b by t, in sRGB */
+const mix = (a, b, t) => { const x = hexRgb(a), y = hexRgb(b); return rgbHex(x.map((v, i) => v + (y[i] - v) * t)); };
+const rgba = (hex, al) => `rgba(${hexRgb(hex).join(",")},${al})`;
+/** the same hue, darker (t > 0) and a touch more saturated */
+const deepen = (hex, t) => { const c = new THREE.Color(hex).offsetHSL(0, t * 0.15, 0); return mix(`#${c.getHexString()}`, "#1a1408", t); };
+const hash = (str) => [...str].reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) % 2147483647, 7) || 1;
+
+/**
+ * Ground paper coloured in by hand, like a kid going over the ô ly sheet with
+ * markers: the colour (a wash under the printed grid), then light marker
+ * strokes of the same hue, slanted and laid side by side, a little darker where
+ * they cross, and soft lighter and darker patches, so no strip is one flat
+ * colour. Two tiles square (`repeat` 1/2), so the strokes repeat less often.
+ */
+export function groundPaper(color) {
+  const TILES = 2;
+  const seed = hash(color);
+  const t = gridPaper({ tint: color, size: 512 * TILES, cells: 16 * TILES, contrast: 0.7, seed, draw: (ctx, W, H) => colourIn(ctx, W, H, color, seed, 16 * TILES) });
+  t.repeat.set(1 / TILES, 1 / TILES);
+  return t;
+}
+
+function colourIn(ctx, W, H, color, seed, across) {
+  const r = rng(seed * 7 + 3);
+  const rr = (lo, hi) => lo + (hi - lo) * r();
+  const u = W / across; // one small square
+  // drawn nine times, a tile apart, so strokes crossing an edge wrap round
+  const tiled = (fn) => {
+    for (const ox of [-W, 0, W]) for (const oy of [-H, 0, H]) {
+      ctx.save();
+      ctx.translate(ox, oy);
+      fn();
+      ctx.restore();
+    }
+  };
+  ctx.lineCap = "round";
+
+  // marker strokes: light tints of the colour, multiplied, so they only deepen it a little
+  const strokes = Array.from({ length: 64 }, () => ({
+    x: rr(0, W), y: rr(0, H), len: rr(0.2, 0.5) * W, ang: Math.PI / 2 + rr(-0.6, -0.32),
+    w: rr(1.1, 2.2) * u, bend: rr(-0.6, 0.6) * u,
+    c: mix(color, "#ffffff", rr(0.45, 0.7)), a: rr(0.35, 0.6),
+  }));
+  ctx.globalCompositeOperation = "multiply";
+  tiled(() => strokes.forEach((st) => {
+    ctx.globalAlpha = st.a;
+    ctx.strokeStyle = st.c;
+    ctx.lineWidth = st.w;
+    const dx = (Math.cos(st.ang) * st.len) / 2, dy = (Math.sin(st.ang) * st.len) / 2;
+    ctx.beginPath();
+    ctx.moveTo(st.x - dx, st.y - dy);
+    ctx.quadraticCurveTo(st.x + st.bend, st.y - st.bend, st.x + dx, st.y + dy);
+    ctx.stroke();
+  }));
+
+  // soft patches, lighter and darker
+  const patches = Array.from({ length: 9 }, () => ({ x: rr(0, W), y: rr(0, H), rad: rr(3, 7) * u, dark: r() < 0.5, a: rr(0.1, 0.2) }));
+  tiled(() => patches.forEach((p) => {
+    const c = p.dark ? deepen(color, 0.25) : "#ffffff";
+    const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.rad);
+    g.addColorStop(0, rgba(c, p.a));
+    g.addColorStop(1, rgba(c, 0));
+    ctx.globalCompositeOperation = p.dark ? "multiply" : "source-over";
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = g;
+    ctx.fillRect(p.x - p.rad, p.y - p.rad, p.rad * 2, p.rad * 2);
+  }));
+  ctx.globalCompositeOperation = "source-over";
+  ctx.globalAlpha = 1;
 }
 
 /** Width of the red-margin strip, in small grid squares. */

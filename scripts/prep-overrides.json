@@ -428,5 +428,62 @@
   "hero/foam_3": {
     "flatten": false,
     "paper": false
+  },
+  "crypto/logo_figma": {
+    "flatten": false
+  },
+  "crypto/logo_after_effects": {
+    "flatten": false
+  },
+  "crypto/logo_claude": {
+    "flatten": false
+  },
+  "crypto/logo_vscode": {
+    "flatten": false
+  },
+  "crypto/logo_blender": {
+    "flatten": false
+  },
+  "crypto/lotus": {
+    "flatten": false
+  },
+  "street/spark_1": {
+    "flatten": false
+  },
+  "street/spark_2": {
+    "flatten": false
+  },
+  "street/spark_3": {
+    "flatten": false
+  },
+  "street/smoke_1": {
+    "flatten": false,
+    "paper": false
+  },
+  "street/smoke_2": {
+    "flatten": false,
+    "paper": false
+  },
+  "street/smoke_3": {
+    "flatten": false,
+    "paper": false
+  },
+  "street/pf_boypho_rear_wheel": {
+    "flatten": false
+  },
+  "street/pf_boypho_front_wheel": {
+    "flatten": false
+  },
+  "street/pf_boypho_bike": {
+    "flatten": false
+  },
+  "street/pf_boypho_spear": {
+    "flatten": false
+  },
+  "street/pf_boypho_ferb": {
+    "flatten": false
+  },
+  "street/pf_boypho_phineas": {
+    "flatten": false
   }
 }

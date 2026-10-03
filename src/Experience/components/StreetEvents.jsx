@@ -1,15 +1,18 @@
 // Set pieces of the Vietnamese street: power poles strung with a tangle of
 // sagging wires, sparrows on the wires that fly off as I ride by, the ward
-// loudspeaker (loa phường) playing its morning tune, and a sidewalk beer table
-// whose glasses clink "DZÔ!" as I pass.
+// loudspeaker (loa phường) playing its morning tune, a sidewalk beer table
+// whose glasses clink "DZÔ!" as I pass, and the boy phố tearing past on one wheel.
 import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
+import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import gsap from "gsap";
 import rigs from "../../content/rigs.json";
-import { SLOT_Z } from "../layout";
+import { GROOVE_DEPTH, SLOT_Z } from "../layout";
+import { heroState } from "../heroState";
 import { HAND, toTexture, whenFont } from "../textures";
-import { ArtCard, rigLayout, rigPart, usePassTrigger } from "./Events";
+import { ArtCard, layerZ, rigLayout, rigPart, usePassTrigger } from "./Events";
+import { artUrl, Stick } from "./PaperCutout";
 
 const wireMaterial = new THREE.MeshBasicMaterial({ color: "#1A1A1A", side: THREE.DoubleSide });
 
@@ -281,4 +284,153 @@ export function BeerTable({ position, h = 1.05, z = SLOT_Z.front + 0.6, ahead = 
   );
 }
 
-export const STREET_EVENTS = { powerLines: PowerLines, beerTable: BeerTable };
+// --- boy phố ------------------------------------------------------------------
+
+const SPARKS = [1, 2, 3].map((i) => artUrl(`street/spark_${i}`));
+const SMOKE = [1, 2, 3].map((i) => artUrl(`street/smoke_${i}`));
+
+/**
+ * Boy phố: Phineas and Ferb dressed up as street boys on a Honda Dream doing a
+ * wheelie, Ferb dragging a spear behind: a hand-drawn rig
+ * (scripts/rig_pf_boypho.mjs), whose wheels spin. As I ride by they come
+ * up from behind me and overtake me along groove B, bucking on the back wheel,
+ * the blade throwing sparks off the road and the exhaust puffing grey smoke,
+ * and are gone up the street. They pass at a steady speed against me (from
+ * `from` to `to` units from me, over `duration` seconds), so however fast I
+ * scroll there is time to see them. Plays again every time I come by.
+ */
+export function BoyPho({ position, h = 1.8, ahead = 2.5, from = -7, to = 10, duration = 3.4, z = SLOT_Z.laneB + 0.16, lift = 0.14 }) {
+  const anchor = useRef();
+  const bike = useRef();
+  const sparks = useRef([]);
+  const smokes = useRef([]);
+  const st = useRef({ rel: from, on: false, v: new THREE.Vector3() });
+  const tl = useRef();
+  const sparkTex = useTexture(SPARKS);
+  const smokeTex = useTexture(SMOKE);
+  const rig = rigs.pf_boypho;
+  const layout = useMemo(() => rigLayout(rig, h), [rig, h]);
+  const parts = useRef({});
+  // the rig sits on its back wheel's contact (it bucks about it); the blade's tip and the exhaust
+  const TIP = layout.toWorld(rig.blade), EXH = layout.toWorld(rig.exhaust);
+  const spin = 4.5 / (118 * layout.s); // the wheels, at about 4.5 units a second
+  const N_SPARK = 30, N_SMOKE = 10;
+  const sparkMats = useMemo(() => Array.from({ length: N_SPARK }, (_, i) => {
+    sparkTex[i % 3].colorSpace = THREE.SRGBColorSpace;
+    return new THREE.MeshBasicMaterial({ map: sparkTex[i % 3], transparent: true, depthWrite: false, opacity: 0 });
+  }), [sparkTex]);
+  const smokeMats = useMemo(() => Array.from({ length: N_SMOKE }, (_, i) => {
+    smokeTex[i % 3].colorSpace = THREE.SRGBColorSpace;
+    return new THREE.MeshBasicMaterial({ map: smokeTex[i % 3], transparent: true, depthWrite: false, opacity: 0 });
+  }), [smokeTex]);
+  const fx = useRef({
+    spark: Array.from({ length: N_SPARK }, () => ({ t: -9 })),
+    smoke: Array.from({ length: N_SMOKE }, () => ({ t: -9 })),
+    ns: 0, nk: 0, accS: 0, accK: 0,
+  });
+  usePassTrigger(
+    anchor,
+    ahead,
+    () => {
+      tl.current?.kill();
+      const s = st.current;
+      s.rel = from;
+      s.on = true;
+      // .set rather than callbacks, so seeking the timeline shows the right state
+      tl.current = gsap.timeline().set(s, { on: true }, 0).to(s, { rel: to, duration, ease: "none" }, 0).set(s, { on: false });
+      if (import.meta.env.DEV) (window.__tl ||= {}).boyPho = tl.current;
+    },
+    () => {
+      tl.current?.kill();
+      st.current.on = false;
+    },
+  );
+  useFrame((state, delta) => {
+    const t = state.clock.elapsedTime;
+    const dt = Math.min(0.05, delta);
+    const s = st.current, e = fx.current;
+    const b = bike.current;
+    b.visible = s.on;
+    if (s.on) {
+      anchor.current.getWorldPosition(s.v);
+      b.position.x = heroState.x - s.v.x + s.rel; // where I am, plus how far they've got past me
+      // bucking on the back wheel
+      b.rotation.z = 0.06 * Math.sin(t * 7) + 0.03 * Math.sin(t * 13.3);
+      b.position.y = Math.abs(Math.sin(t * 7)) * 0.04;
+      const p = parts.current;
+      if (p.rear_wheel) p.rear_wheel.rotation.z -= spin * dt;
+      if (p.front_wheel) p.front_wheel.rotation.z -= spin * dt;
+      if (p.spear) p.spear.rotation.z = 0.012 * Math.sin(t * 47) + 0.008 * Math.sin(t * 31); // rattling on the road
+      if (p.phineas) p.phineas.position.y = p.phineas.userData.y + Math.abs(Math.sin(t * 7 + 0.6)) * 0.025;
+      if (p.ferb) p.ferb.position.y = p.ferb.userData.y + Math.abs(Math.sin(t * 7 + 1.1)) * 0.03;
+      const c = Math.cos(b.rotation.z), sn = Math.sin(b.rotation.z);
+      const local = ([x, y]) => [b.position.x + x * c - y * sn, b.position.y + x * sn + y * c];
+      // sparks off the blade, a shower of them
+      e.accS += dt * 60;
+      while (e.accS >= 1) {
+        e.accS -= 1;
+        const p = e.spark[e.ns];
+        e.ns = (e.ns + 1) % N_SPARK;
+        const [x, y] = local(TIP);
+        Object.assign(p, { t, x: x + Math.random() * 0.1, y: y + 0.02, vx: 0.8 + Math.random() * 2.4, vy: 1.2 + Math.random() * 1.8, s: 0.17 + Math.random() * 0.14, r: Math.random() * 6, life: 0.3 + Math.random() * 0.22 });
+      }
+      // grey puffs from the exhaust
+      e.accK += dt * 11;
+      while (e.accK >= 1) {
+        e.accK -= 1;
+        const p = e.smoke[e.nk];
+        e.nk = (e.nk + 1) % N_SMOKE;
+        const [x, y] = local(EXH);
+        Object.assign(p, { t, x: x - 0.08, y, vx: -0.3 + Math.random() * 0.4, vy: 0.35 + Math.random() * 0.25, s: 0.22 + Math.random() * 0.08, life: 0.8 + Math.random() * 0.3 });
+      }
+    }
+    // the particles stay where they were thrown, in the street's frame
+    e.spark.forEach((p, i) => {
+      const m = sparks.current[i];
+      if (!m) return;
+      const age = t - p.t;
+      if (age < 0 || age > p.life) { m.visible = false; return; }
+      m.visible = true;
+      m.position.set(p.x + p.vx * age, p.y + p.vy * age - 4.5 * age * age, 0.02);
+      m.rotation.z = p.r + age * 9;
+      const k = p.s * (1 - (age / p.life) * 0.6);
+      m.scale.set(k, k, 1);
+      sparkMats[i].opacity = 1 - (age / p.life) ** 2;
+    });
+    e.smoke.forEach((p, i) => {
+      const m = smokes.current[i];
+      if (!m) return;
+      const age = t - p.t;
+      if (age < 0 || age > p.life) { m.visible = false; return; }
+      m.visible = true;
+      m.position.set(p.x + p.vx * age, p.y + p.vy * age, -0.02);
+      const k = p.s * (1 + 1.6 * (age / p.life));
+      m.scale.set(k * 1.35, k, 1);
+      smokeMats[i].opacity = 0.75 * (1 - age / p.life);
+    });
+  });
+  return (
+    // lifted a little over groove B, so the wheels and the scraping blade show over the pavement
+    <group ref={anchor} position={[position[0], position[1] - 0.16 + lift, z]}>
+      <group ref={bike} visible={false}>
+        {rig.order.map((name) => rigPart("pf_boypho", rig, layout, name, (el) => {
+          if (el && el.userData.y === undefined) el.userData.y = el.position.y; // its rest height, once
+          parts.current[name] = el;
+        }, layerZ(rig, name)))}
+        <Stick from={0.1} to={-GROOVE_DEPTH.grooveB + 0.12 - lift} />
+      </group>
+      {sparkMats.map((mat, i) => (
+        <mesh key={i} ref={(el) => (sparks.current[i] = el)} material={mat} visible={false} renderOrder={4}>
+          <planeGeometry args={[1, 1]} />
+        </mesh>
+      ))}
+      {smokeMats.map((mat, i) => (
+        <mesh key={i} ref={(el) => (smokes.current[i] = el)} material={mat} visible={false} renderOrder={3}>
+          <planeGeometry args={[1, 1]} />
+        </mesh>
+      ))}
+    </group>
+  );
+}
+
+export const STREET_EVENTS = { powerLines: PowerLines, beerTable: BeerTable, boyPho: BoyPho };

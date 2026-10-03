@@ -44,4 +44,5 @@ See `DESIGN.md`: the ground profile with two grooves, the depth slots, the rides
 - Drawings:
   - Mine, made in Krita: the character, Teemo hat, bike, wall, street sign, sun and apple tree.
   - AI-generated in my style: everything else.
+- Software logos floating on the sea (Figma, Adobe After Effects, Claude, Visual Studio Code, Blender) are trademarks of their owners. They are redrawn as doodles from the official marks, only to show the tools I work with.
 - Fan art of characters owned by their creators, made for fun and not for profit: Doraemon, Naruto, Studio Ghibli, Disney, Pixar's Up, Phineas and Ferb (Perry), Oggy, Shaun the Sheep, Mr. Bean, Bakugan, Robo Trái Cây, League of Legends (Riot Games), Gunny, Moly, and internet memes (Pepe, This is fine).

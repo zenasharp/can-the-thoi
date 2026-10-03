@@ -1,0 +1,457 @@
+/* ---- the loading cover: a vở on a wooden desk (NotebookIntro) -------------- */
+
+.nb {
+  --cover-a: #a9d4f0;
+  --cover-b: #6ea7d6;
+  --tape: #24508a;
+  --tape-dark: #183a68;
+  --paper: #f6f1e6;
+  --grain-fine: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.3' numOctaves='1' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.3 0 0 0 0 0.22 0 0 0 0 0.12 0.28 0 0 0 -0.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.25 0 0 0 0 0.18 0 0 0 0 0.1 0.5 0 0 0 -0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow: hidden;
+  background: #5a3820;
+  pointer-events: auto;
+}
+
+.nb-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+/* the camera: its perspective holds the 3D book; it scales (leans in) as a whole */
+.nb-zoom {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+}
+
+/* the desk: a photo of oak veneer (src set in JS, for the base path), a square
+   as wide as the screen's diagonal so it still fills it when the camera turns */
+.nb-desk {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #8d5a2f center / cover no-repeat;
+}
+
+/* the lamp: warm light from the upper left, the room darker at the edges */
+.nb-light {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 60% at 30% 22%, rgba(255, 226, 170, 0.22), rgba(255, 226, 170, 0) 70%),
+    radial-gradient(ellipse 80% 75% at 50% 48%, rgba(0, 0, 0, 0) 50%, rgba(20, 10, 2, 0.55) 100%);
+}
+
+/* the book: its left edge (the spine) sits at the middle of the screen; JS moves it */
+.nb-book {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-style: preserve-3d;
+}
+
+/* its shadow on the desk, thrown down and right by the lamp */
+.nb-shadow {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px 8px 8px 4px;
+  background: rgba(25, 12, 3, 0.5);
+  transform: translateZ(calc(var(--t) * -1 - 1px)) translate(14px, 20px);
+  filter: blur(18px);
+}
+.nb-shadow.contact {
+  background: rgba(15, 7, 2, 0.55);
+  transform: translateZ(calc(var(--t) * -1 - 0.5px)) translate(2px, 3px);
+  filter: blur(3px);
+}
+/* the open cover's shadow on the desk, left of the spine */
+.nb-desk-shade {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px 3px 3px 8px;
+  background: rgba(15, 7, 2, 0.45);
+  transform: translateZ(calc(var(--t) * -1 - 0.5px)) translate(2px, 4px);
+  filter: blur(4px);
+  opacity: 0;
+}
+
+/* the page stack's sides: the bottom (towards us), the spine, the right edge */
+.nb-edge {
+  position: absolute;
+  backface-visibility: hidden;
+}
+.nb-edge-b {
+  left: 0;
+  top: 100%;
+  width: 100%;
+  height: var(--t);
+  transform-origin: 50% 0;
+  transform: rotateX(-90deg);
+  border-radius: 0 0 4px 0;
+  background:
+    linear-gradient(to bottom, transparent calc(100% - 1.6px), var(--cover-b) calc(100% - 1.6px)),
+    linear-gradient(90deg, var(--tape) 0 4%, transparent 4%),
+    repeating-linear-gradient(to bottom, #f5f0e4 0 1.2px, #cdbfa8 1.2px 1.7px),
+    #f1ebdd;
+  filter: brightness(0.94);
+}
+.nb-edge-s {
+  top: 0;
+  left: calc(var(--t) * -1);
+  width: var(--t);
+  height: 100%;
+  transform-origin: 100% 50%;
+  transform: rotateY(-90deg);
+  background:
+    repeating-linear-gradient(35deg, rgba(255, 255, 255, 0.07) 0 1px, transparent 1px 3px),
+    linear-gradient(90deg, var(--tape-dark), var(--tape) 50%, var(--tape-dark));
+}
+.nb-edge-r {
+  top: 0;
+  left: 100%;
+  width: var(--t);
+  height: 100%;
+  transform-origin: 0 50%;
+  transform: rotateY(90deg);
+  background:
+    linear-gradient(90deg, transparent calc(100% - 1.6px), var(--cover-b) calc(100% - 1.6px)),
+    repeating-linear-gradient(90deg, #f5f0e4 0 1.2px, #cdbfa8 1.2px 1.7px);
+  filter: brightness(0.82);
+}
+
+/* the first page: ô-ly grid paper like the world's wall (the same paper colour,
+   lines and 4-cell squares, at the size of the scene drawn on it), curving into
+   the gutter. No margin line: the scene brings its own. */
+.nb-page {
+  position: absolute;
+  inset: 0;
+  border-radius: 0 5px 5px 0;
+  overflow: hidden;
+  background-color: #f7f5ec;
+  background-image:
+    linear-gradient(90deg, rgba(70, 45, 20, 0.2), rgba(70, 45, 20, 0.06) 4%, rgba(70, 45, 20, 0) 10%),
+    linear-gradient(rgba(98, 112, 205, 0.42) 0.8px, transparent 0.8px),
+    linear-gradient(90deg, rgba(98, 112, 205, 0.42) 0.8px, transparent 0.8px),
+    linear-gradient(rgba(150, 170, 228, 0.3) 0.6px, transparent 0.6px),
+    linear-gradient(90deg, rgba(150, 170, 228, 0.3) 0.6px, transparent 0.6px),
+    var(--grain-fine);
+  background-size: 100% 100%, var(--sq) var(--sq), var(--sq) var(--sq), calc(var(--sq) / 4) calc(var(--sq) / 4), calc(var(--sq) / 4) calc(var(--sq) / 4), auto;
+  background-position: 0 0, 0 calc(var(--sq) / 2), calc(var(--sq) / 2) 0, 0 calc(var(--sq) / 2), calc(var(--sq) / 2) 0, 0 0;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.08);
+}
+/* the page painted whole (NotebookIntro paintScene): the wall's own paper with
+   the world's opening scene on it, its edges fading into the paper. Until then
+   the CSS grid above stands in. */
+.nb-scene {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* the world's own canvas, with the same soft edge, while it takes the
+   drawing's place on the page */
+.world.nb-handoff {
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent, #000 var(--f, 0px), #000 calc(100% - var(--f, 0px)), transparent),
+    linear-gradient(transparent, #000 var(--f, 0px), #000 calc(100% - var(--f, 0px)), transparent);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(90deg, transparent, #000 var(--f, 0px), #000 calc(100% - var(--f, 0px)), transparent),
+    linear-gradient(transparent, #000 var(--f, 0px), #000 calc(100% - var(--f, 0px)), transparent);
+  mask-composite: intersect;
+}
+.world.nb-handoff {
+  z-index: 101;
+  transform-origin: 50% 50%;
+}
+
+.nb-page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(70, 45, 20, 0.2), rgba(70, 45, 20, 0.06) 4%, rgba(70, 45, 20, 0) 10%);
+}
+
+/* the cover's shadow sweeping across it as the cover lifts */
+.nb-page-shade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  opacity: 0;
+  background: linear-gradient(90deg, rgba(20, 10, 2, 0.85), rgba(20, 10, 2, 0.75) 78%, rgba(20, 10, 2, 0));
+  filter: blur(5px);
+}
+
+/* the cover: flat while being written on, then a chain of strips that can bend */
+.nb-cover {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+.nb-cover-flat {
+  position: absolute;
+  inset: 0;
+}
+.nb-chain {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  visibility: hidden;
+}
+.nb-strip {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform-origin: 0 50%;
+}
+.nb-face {
+  position: absolute;
+  top: 0;
+  left: -1px;
+  width: calc(100% + 2px); /* overlap the neighbours a pixel, so no seams show between strips */
+  height: 100%;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+.nb-back {
+  transform: rotateY(180deg);
+}
+.nb-front.last {
+  border-radius: 0 6px 6px 0;
+}
+.nb-back.last {
+  border-radius: 6px 0 0 6px;
+}
+.nb-slice {
+  position: absolute;
+  top: 0;
+  height: 100%;
+}
+.nb-shade {
+  position: absolute;
+  inset: 0;
+}
+
+/* the inside of the cover: plain coated board, the binding tape folded over at the spine */
+.nb-inside {
+  background:
+    linear-gradient(270deg, var(--tape) 0 5.5%, rgba(0, 0, 0, 0.22) 5.5%, rgba(0, 0, 0, 0.06) 7.5%, rgba(0, 0, 0, 0) 12%),
+    var(--grain),
+    #eeeae0;
+}
+
+/* ---- the cover's outside ---- */
+
+.nb-cover-art {
+  position: absolute;
+  inset: 0;
+  border-radius: 0 6px 6px 0;
+}
+
+/* the print: a sky-blue cover, a faint dot pattern, soft clouds, a thin white frame */
+.nb-print {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 104%, #fff 0 13%, transparent 13.3%),
+    radial-gradient(circle at 38% 100%, #fff 0 15%, transparent 15.3%),
+    radial-gradient(circle at 62% 106%, #fff 0 17%, transparent 17.3%),
+    radial-gradient(circle at 88% 101%, #fff 0 14%, transparent 14.3%),
+    radial-gradient(circle at 28% 96%, rgba(255, 255, 255, 0.55) 0 12%, transparent 12.3%),
+    radial-gradient(circle at 76% 95%, rgba(255, 255, 255, 0.55) 0 13%, transparent 13.3%),
+    radial-gradient(circle, rgba(255, 255, 255, 0.22) 0 1.6px, transparent 2px) 0 0 / 18px 18px,
+    var(--grain),
+    linear-gradient(165deg, var(--cover-a), var(--cover-b));
+}
+.nb-print::after {
+  content: "";
+  position: absolute;
+  inset: 3.5% 4% 3.5% 10.5%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+}
+
+/* a sticker of me with the bamboo-copter, stuck on a little crooked */
+.nb-sticker {
+  position: absolute;
+  left: 56%;
+  bottom: 12%;
+  height: 32%; /* the bamboo-copter on top (scripts/dev/intro_sticker.mjs) */
+  width: auto;
+  transform: rotate(8deg);
+  filter: drop-shadow(0.5px 1.5px 1px rgba(0, 0, 0, 0.3));
+}
+
+/* the binding tape, wrapped round the spine onto the cover */
+.nb-tape {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 6.5%;
+  background:
+    repeating-linear-gradient(35deg, rgba(255, 255, 255, 0.07) 0 1px, transparent 1px 3px),
+    linear-gradient(90deg, var(--tape-dark), var(--tape) 35%, #2d5d9c 80%, var(--tape));
+  box-shadow: 1px 0 1.5px rgba(0, 0, 0, 0.35);
+}
+
+/* the lamination's sheen */
+.nb-gloss {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    linear-gradient(118deg, rgba(255, 255, 255, 0) 28%, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 58%, rgba(255, 255, 255, 0.12) 76%, rgba(255, 255, 255, 0) 84%);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), inset -3px 0 4px rgba(0, 0, 0, 0.08);
+}
+
+/* the name label: white, a printed double border, one dotted line to write on */
+.nb-label {
+  position: absolute;
+  left: 15%;
+  right: 7.5%;
+  top: 17%;
+  padding: 7% 5% 5.5%;
+  border-radius: 12px;
+  background: var(--grain), #fffdf7;
+  box-shadow:
+    inset 0 0 0 2.5px #3b78bf,
+    inset 0 0 0 5px #fffdf7,
+    inset 0 0 0 6.2px #3b78bf,
+    0 1px 1.5px rgba(0, 0, 0, 0.18);
+}
+.nb-writing {
+  position: relative;
+}
+.nb-hand {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.nb-dots {
+  stroke: #8fa9cf;
+  stroke-width: 1.8;
+  stroke-dasharray: 1.6 5;
+  stroke-linecap: round;
+}
+/* ballpoint ink: a little uneven, a little scratchy (the #nb-ink filter) */
+.nb-ink {
+  fill: none;
+  stroke: #1c3a8e;
+  stroke-width: 3.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.94;
+}
+.nb-pen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* ---- scroll sign ---- */
+
+.nb-scroll {
+  position: absolute;
+  left: 50%;
+  bottom: max(18px, 4.5vh);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  opacity: 0;
+  transform: translate(-50%, 10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.5));
+}
+.nb-scroll.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  transition-delay: 0.5s;
+}
+.nb-mouse {
+  position: relative;
+  width: 26px;
+  height: 41px;
+  border: 2.5px solid #fbf3e4;
+  border-radius: 14px;
+}
+.nb-mouse span {
+  position: absolute;
+  left: 50%;
+  top: 7px;
+  width: 4px;
+  height: 8px;
+  margin-left: -2px;
+  border-radius: 2px;
+  background: #fbf3e4;
+  animation: nb-wheel 1.7s ease-in-out infinite;
+}
+@keyframes nb-wheel {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  70%,
+  100% {
+    transform: translateY(13px);
+    opacity: 0;
+  }
+}
+.nb-chev i {
+  display: block;
+  width: 11px;
+  height: 11px;
+  margin: -4px auto 0;
+  border-right: 2.5px solid #fbf3e4;
+  border-bottom: 2.5px solid #fbf3e4;
+  opacity: 0;
+  animation: nb-chev 1.7s ease-in-out infinite;
+}
+.nb-chev i + i {
+  animation-delay: 0.22s;
+}
+@keyframes nb-chev {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px) rotate(45deg);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(5px) rotate(45deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nb-mouse span,
+  .nb-chev i {
+    animation: none;
+    opacity: 1;
+  }
+}

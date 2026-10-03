@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { Suspense, useMemo, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Html, useTexture } from "@react-three/drei";
 import * as THREE from "three";
@@ -145,6 +145,11 @@ const DUST = 10;
  * as it swells and fades. `active()` says whether my runner is on screen.
  */
 const PUFFS = { dust: [1, 2, 3].map((i) => artUrl(`hero/dust_${i}`)), foam: [1, 2, 3].map((i) => artUrl(`hero/foam_${i}`)) };
+// Loaded with the rest, as the very sets useTexture asks for (it caches a list
+// under the whole list, not per drawing): a set first asked for mid-ride (the
+// foam, at the sea) would otherwise suspend and blank the world for a moment.
+useTexture.preload(PUFFS.dust);
+useTexture.preload(PUFFS.foam);
 
 function DustTrail({ motion, follow, stride, active, kind }) {
   const meshes = useRef([]);
@@ -468,14 +473,17 @@ export default function Hero({ scrollProgress, cameraScrollCurve }) {
         </Html>
       )}
     </group>
-    {/* dust kicked up behind me while I run (rides with dust: Skaarl) */}
-    <DustTrail
-      motion={motion}
-      follow={group}
-      stride={ride.stride || 10.5}
-      kind={ride.dust}
-      active={() => ride.dust && heroState.hideRide !== rideKey && heroState.sink === 0}
-    />
+    {/* dust kicked up behind me while I run (rides with dust: Skaarl), in its own
+        Suspense so a late texture can only cost a few puffs, never the whole world */}
+    <Suspense fallback={null}>
+      <DustTrail
+        motion={motion}
+        follow={group}
+        stride={ride.stride || 10.5}
+        kind={ride.dust}
+        active={() => ride.dust && heroState.hideRide !== rideKey && heroState.sink === 0}
+      />
+    </Suspense>
     </>
   );
 }

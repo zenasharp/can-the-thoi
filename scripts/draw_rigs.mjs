@@ -9,6 +9,7 @@
 import fs from "fs";
 import sharp from "sharp";
 import { INK, STROKE as S, limb, wobbleDefs } from "./wobble.mjs";
+import { pfBoyphoRig } from "./rig_pf_boypho.mjs";
 const hexagon = (cx, cy, r, fill, inner) => {
   const pts = (rr) => Array.from({ length: 6 }, (_, i) => {
     const a = (Math.PI / 3) * i + Math.PI / 6;
@@ -29,6 +30,7 @@ const bumps = (cx, cy, rx, ry, n, k = 1.22) => {
 };
 
 const RIGS = {
+  ...pfBoyphoRig,
   // Totoro at the bus stop
   totoro: {
     canvas: [1100, 1250], anchor: [620, 1205], // anchor: canvas point at the rig's position (feet)
@@ -384,7 +386,7 @@ for (const [rig, def] of Object.entries(RIGS)) {
   const shift = (body) => (ox || oy ? `<g transform="translate(${ox} ${oy})">${body}</g>` : body);
   const svg = (body) => `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${wobbleDefs(W, H, rig.length * 5)}<g filter="url(#wob)"><g ${S}>${shift(body)}</g></g></svg>`;
   // named points (shifted with the drawing); "wires" and "loa" are lists of points
-  const points = Object.fromEntries(["hole", "socket", "seat", "perch", "wires", "loa", "mouth"].filter((k) => def[k]).map((k) => [k, Array.isArray(def[k][0]) ? def[k].map(at) : at(def[k])]));
+  const points = Object.fromEntries(["hole", "socket", "seat", "perch", "wires", "loa", "mouth", "blade", "exhaust"].filter((k) => def[k]).map((k) => [k, Array.isArray(def[k][0]) ? def[k].map(at) : at(def[k])]));
   const entry = { group: def.group || "childhood", canvas: { w: W, h: H }, anchor: at(def.anchor), order: Object.keys(def.parts), pivots: {}, parts: {}, ...points };
   for (const [name, [pivot, body]] of Object.entries(def.parts)) {
     const { data, info } = await sharp(Buffer.from(svg(body))).png().trim({ threshold: 1 }).toBuffer({ resolveWithObject: true });

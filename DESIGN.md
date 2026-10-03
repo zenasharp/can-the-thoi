@@ -85,7 +85,10 @@ The two gates:
 
 - **Wall:** one continuous sheet of Vietnamese ô ly school-notebook paper (Hồng Hà style, `gridPaper()` in `textures.js`). It has a fine light-blue grid with a purple-blue line every 4 squares, and a red margin line at the start of every scene (page).
 - **Grid alignment:** the grid tile (`GRID_TILE` in `layout.js`) divides the loop shift exactly, so the grid stays aligned across the loop.
-- **Ground strips:** the same paper, tinted per scene with weaker lines.
+- **Ground strips:** the same paper, tinted per scene with weaker lines, then **coloured in by hand** (`groundPaper()` in `textures.js`), like a kid going over the sheet with markers.
+  - Light marker strokes of the strip's own hue, slanted and laid side by side (a little darker where they cross), plus soft lighter and darker patches, so no strip is one flat colour. Colour only, no drawn motifs.
+  - The sides are lit from above: light at the top, darker towards the foot.
+  - One texture spans two grid tiles, so the strokes repeat less often. Textures are shared per colour, and a groove reuses its neighbour's, dimmed through the material colour.
 
 ## Camera (layout.js `CAMERA`)
 
@@ -221,6 +224,15 @@ Left to right:
    - A **Suzuki Viva** is parked outside the repair shop.
    - The **bánh mì cart** stands on the pavement in front.
 3. **Trà đá** on red stools in the front row, with a **điếu cày** (bamboo water pipe, SVG) leaning on them. Then the apple tree and the street-name sign.
+3b. **Boy phố** (`BoyPho` in `StreetEvents.jsx`, x 12.5): Phineas and Ferb dressed up as street boys on a Honda Dream doing a wheelie, after the "phóng lợn" meme. Phineas drives with a grin; Ferb, deadpan, drags a long spear behind.
+   - **The drawing:** hand-coded SVG, a rig (`scripts/rig_pf_boypho.mjs`, rendered by `draw_rigs.mjs`) with spinning spoked wheels, the bike, the spear, Ferb and Phineas. The image service refused the boys by name and the blade, and its faces came out messy.
+     - Phineas keeps his triangle head and big round eye, with a red mohawk gelled up in spikes, a tight orange tee with yellow stripes and rolled-up sleeves, a gold chain, ripped jeans and white sneakers.
+     - Ferb keeps his tall head and sleepy eye, with a green quiff and shaved sides, an open white shirt with a popped collar over a black vest, slim purple trousers and white sneakers.
+     - The bike is a Honda Dream traced over a photo of the real one (`raw_art/_refs/street/honda_dream.png`): its parts are written in the photo's pixels and mirrored and scaled into the rig (`photo()`). It has the cream leg shield with its round emblem, the maroon head with the square headlight and orange indicator, the high maroon front mudguard with the chrome rack on it, the long black seat, the maroon rear body with its gold stripe, taillight and grab rail, the rear shock, the engine, the chrome muffler, and big spoked rims with drum hubs. `scripts/dev/dream_overlay.mjs` lays the trace over the photo to check it.
+     - Phineas grins with an open mouth and a tongue (the white teeth line read as a streak).
+   - **The pass:** as I ride by they come up from behind and overtake me along groove B, gone up the street. They move at a steady speed against me (from 7 units behind to 10 ahead, over 3.4 s), so however fast I scroll they cross the screen at the same pace and there is time to see them.
+   - **The ride:** they buck on the back wheel, the wheels spin, the boys bob and the spear rattles. Scribbled sparks (`street/spark_1..3`) shower off the scraping blade, and grey puffs (`street/smoke_1..3`) come out of the exhaust; both stay where they were thrown.
+   - It plays again every time I come by. It is lifted a little over the groove, so the wheels and the sparks show over the pavement.
 4. **The yellow wall plastered with ads**, under the sun. The ads are SVG slips (`doodles_street.mjs`): "KHOAN CẮT BÊ TÔNG", "CHO THUÊ PHÒNG", "DẠY KÈM TOÁN LÝ HOÁ", with fake phone numbers.
 5. **Bia vỉa hè** (`BeerTable` in `StreetEvents.jsx`): a low blue plastic table with red and blue stools, peanuts, an ice bucket, beer bottles and a beer crate (AI drawing).
    - The drawing is seen a little from above. It stands at the very front of the pavement (1.05 tall), so only the tops of the bottles reach a little over the road behind it. At the back of the pavement its back stools seemed to float over the road.
@@ -258,6 +270,16 @@ The last world is a sea. It replaces the old adult scene; only the handwriting o
   - They are prepped as tiles (override `tile: true`: no trim, no pad) and drawn as flat planes edge to edge, so there is no seam.
 - Past a given x each row switches to the dark tiles, so the sea darkens as the story does.
 
+**The wall darkens too** (`wall.gloom` in `site.js`, `WallGloom` in `World.jsx`):
+- A dark blue-grey shade lies over the wall, under the wall writing and everything standing in front. Its strength follows stops along the scene.
+- It is a little lighter towards the foot of the wall.
+- It deepens through the dark half to its darkest under the tangle of thoughts, then clears as my wing grows, so I fly up into a bright sky.
+
+**Grown-up life floats by:** the logos of the tools I work in, Figma, After Effects, Claude, VS Code and Blender, bob half sunk on the water right at the start of the sea, between the pill and the cabal (x 2.4 to 12.2).
+- They are little, like the pump.fun pill (`anim: "float"` with a `tilt`, sitting low in the waves).
+- They are drawn from the real marks' geometry (`scripts/doodles_logos.mjs`): the official SVGs on Wikimedia Commons, and Simple Icons for Claude.
+- They are coloured flat, outlined in ink and wobbled like the other doodles. Logos are never left to the image model or drawn from memory, because they come out wrong.
+
 **I surf** (ride `motion: "surf"`) on a WAGMI surfboard (SVG), leaving white sea spray behind me (`dust: "foam"`).
 - I wear my white and teal windbreaker here (`hero/hero_adult`). It was AI-traced from my base chibi, a photo of the real jacket and the old costume's headphones: a white jacket, one teal chevron across the chest, teal collar, cuffs and waistband.
 - No guitar and no red scarf any more.
@@ -293,6 +315,8 @@ Left to right:
        - It brings its own two small clouds and flies just behind their layer (both are behind me).
        - Its path is worked out from my position, so scrolling back plays it backwards.
    - `Wing` in `Hero.jsx` places the wing's root on my back, behind me, and beats it around that root.
+9. **The lotus** (`crypto/lotus`, SVG in `doodles_crypto.mjs`) blooms at the very end of the sea, where the sunbeams land, so I rise from it on my wing.
+   - It is a cup of pointed pink petals in three rows, with deeper pink tips and veins and a yellow heart, on two lily pads, with a closed bud on its stem beside it.
 
 ## Rigs (`scripts/draw_rigs.mjs`)
 
@@ -320,6 +344,34 @@ What it doesn't have:
 - The shadow-catcher overlays and the lights.
 - Anything hidden at rest: flip-book frames that aren't showing, and set pieces not yet triggered (Drago, Agent P, Blitzcrank, the dove, the tangle...).
 - The sky seam sits before the childhood world, where it waits at the start of a loop.
+
+## Loading cover (`src/components/NotebookIntro.jsx`)
+
+The loading screen is a school notebook (vở) lying on a wooden desk, seen from above at an angle. It is realistic on purpose, unlike the scribbly world inside it.
+- **The desk** is a photo-like oak texture made with AI (`raw_art/intro/desk_wood.png` → `public/art/intro/desk_wood.webp` via `scripts/dev/intro_desk.mjs`). A warm lamp light from the upper left and a dark vignette sit over it.
+- **The notebook** is built in CSS 3D:
+  - a glossy sky-blue cover with clouds, a dotted print, a thin white frame, the blue binding tape and a sticker of me with the bamboo-copter (`intro/sticker_childhood`: the childhood costume with the copter blades glued back on, `scripts/dev/intro_sticker.mjs`; in the world the blades are a separate spinning part);
+  - a white name label with a printed double border and one dotted line. **It carries no text but the title.**
+  - The page stack shows its edges (bottom, spine tape, right side). There is a soft and a contact shadow on the desk.
+- **Progress = handwriting.** A ballpoint pen (a Thiên Long-style pen, drawn in SVG with cylindrical shading and a shadow that parts from the tip when it lifts) writes "Cấn Thế Thôi" on the label as the site loads.
+  - The strokes are in `src/components/handwriting.js`, in the order a Vietnamese hand writes them (the letters, then the circumflex, then the acute). They slant right and wobble a little (an SVG displacement filter), in ballpoint blue.
+  - The pen writes at a hand's pace (the whole title in about 3.2 s), and never past what has loaded (drei `useProgress`). It lifts between strokes (higher for longer jumps) and hovers while it waits. It never hangs: it finishes once the canvas is ready and nothing is loading.
+- **Written:** the pen is taken away, a scroll sign (a mouse with a rolling wheel and chevrons, no text) fades in, and the cover's free edge springs up a little every couple of seconds.
+- **The scene is on the first page.** When the world is in, the page is painted from it (`introBridge.capture`, `src/Experience/introCapture.js`).
+  - **The picture:** a copy of the world's current frame, nearly as big as the page (96%). On a landscape screen it is drawn sideways across the portrait page, its top towards the spine. On a portrait screen it stands upright. Its edges fade into the paper.
+  - **The paper around it:** the wall's own paper, rendered alone (only the meshes named `paperWall` and `paperMargin`, through a camera layer) by the same camera but zoomed out to cover the whole page.
+    - It is rendered in tiles (a view offset per tile), so it is as sharp as the picture.
+    - Both are renders from the same eye, so the page's grid and red margin run on from the scene's exactly, perspective and all. The picture's fade is invisible on the wall: only the ground and the drawings fade out.
+- **Opening:** a scroll, a click, a key or a tap opens the notebook (about 2.75 s). The scene is copied again at that moment, so it shows the world exactly as it is.
+  - The cover is cut into 16 nested strips that turn in a chain, so it bends: the free edge leads while it is lifted, then trails as it falls open. It lands on the desk with one small bounce.
+  - Each strip edge is lit for its angle (a glint when it faces the lamp, shade away from it), as a gradient across the strip so the bend shades smoothly. The cover throws a shadow over the first page, then onto the desk.
+  - Meanwhile the camera comes round to look straight down at the book (the lamp's mood goes with the tilt).
+  - It then turns a quarter, so the sideways scene stands upright (landscape screens only), and dives into the scene until it fills the screen.
+- **The hand-off:** once the book lies flat, the world's own canvas (`.world`, via `introBridge.frame`) is laid exactly over the drawing: same spot, same turn, same size, same soft edge (class `nb-handoff`, z-index above the cover).
+  - It then rides the dive up to full screen. When the dive ends, its transform is the identity and the cover is simply removed: there is no fade and no swap to see.
+  - Without the bridge (the world can't be borrowed), it falls back to leaning into the page and fading.
+  - Inputs are caught at the window in the capture phase until it is gone, so they don't scroll the world behind it.
+- **Dev:** `__nb({ A, tilt, cam, fade })` poses the opening by hand (A = cover angle 0..180, tilt 1..0, cam = turn and dive 0..1). It copies the scene afresh each time.
 
 ## Speech bubbles
 

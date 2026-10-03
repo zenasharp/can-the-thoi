@@ -3,7 +3,7 @@
 // (the original referenced an undefined `scrollSpeed`) and mousedown is wired up,
 // plus arrow keys.
 import { useEffect, useRef } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useThree } from "@react-three/fiber";
 import { PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
 import normalizeWheel from "normalize-wheel";
@@ -11,10 +11,26 @@ import Scene from "./Scene";
 import { WORLD_LENGTH } from "./layout";
 import { scrollPilot } from "./scrollPilot";
 import gsap from "gsap";
+import { introBridge } from "../introBridge";
+import { captureWorld } from "./introCapture";
 
 // ~0.5 world units per wheel notch, whatever the world length
 const BASE_SCROLL_SPEED = 0.0085 * (59.2 / WORLD_LENGTH);
 const LERP_FACTOR = 0.1;
+
+/** Hands the loading cover a copy of the world and its paper, and the element to move (src/introBridge.js). */
+function IntroBridge() {
+  const get = useThree((s) => s.get);
+  useEffect(() => {
+    introBridge.capture = (Z, paperWidth) => {
+      const { gl, scene, camera } = get();
+      return captureWorld(gl, scene, camera, Z, paperWidth);
+    };
+    introBridge.frame = () => get().gl.domElement.closest(".world");
+    return () => { introBridge.capture = null; introBridge.frame = null; };
+  }, [get]);
+  return null;
+}
 
 export default function Experience({ onReady }) {
   const camera = useRef();
@@ -94,6 +110,7 @@ export default function Experience({ onReady }) {
 
   return (
     <Canvas
+      className="world"
       flat
       shadows="soft"
       dpr={[1, 2]}
@@ -114,6 +131,7 @@ export default function Experience({ onReady }) {
       <group ref={cameraGroup}>
         <PerspectiveCamera ref={camera} makeDefault fov={35} near={0.1} far={200} />
       </group>
+      <IntroBridge />
     </Canvas>
   );
 }
