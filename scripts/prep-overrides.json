@@ -1,0 +1,432 @@
+{
+  "hero/hero_base": {
+    "skip": false,
+    "perryShorts": true
+  },
+  "street/bike": {
+    "skip": true
+  },
+  "hero/hero_street": {
+    "skip": false,
+    "perryShorts": true
+  },
+  "adult/pill_mascot": {
+    "cleanup": true
+  },
+  "vehicles/bull": {
+    "cleanup": true
+  },
+  "hero/hero_games": {
+    "skip": false,
+    "perryShorts": true
+  },
+  "hero/hero_childhood": {
+    "skip": false,
+    "perryShorts": true,
+    "keepColors": [
+      "#FEF006"
+    ]
+  },
+  "hero/hero_adult": {
+    "skip": false,
+    "perryShorts": true
+  },
+  "childhood/fruit_tree": {
+    "fillHoles": true,
+    "unify": "#6EAA5E",
+    "colors": 6
+  },
+  "childhood/perry_normal": {
+    "flatten": false
+  },
+  "childhood/perry_agent": {
+    "flatten": false
+  },
+  "childhood/up_house": {
+    "flatten": false,
+    "wobble": 3,
+    "restring": {
+      "y0": 672,
+      "y1": 752,
+      "to": [
+        606,
+        644,
+        770
+      ],
+      "up": 110,
+      "geometry": true
+    }
+  },
+  "hero/copter_blades": {},
+  "childhood/pf_rocket": {
+    "flatten": false
+  },
+  "childhood/shaun": {
+    "flatten": false
+  },
+  "childhood/smoke": {
+    "flatten": false
+  },
+  "childhood/cloud": {
+    "flatten": false
+  },
+  "childhood/cloud_b": {
+    "flatten": false
+  },
+  "childhood/flower_daisy": {
+    "flatten": false
+  },
+  "childhood/rocket_flame_1": {
+    "flatten": false
+  },
+  "childhood/rocket_flame_2": {
+    "flatten": false
+  },
+  "childhood/rocket_flame_3": {
+    "flatten": false
+  },
+  "childhood/rocket_flame_4": {
+    "flatten": false
+  },
+  "childhood/timmy": {
+    "flatten": false
+  },
+  "childhood/teddy": {
+    "flatten": false
+  },
+  "games/teemo_shroom": {
+    "flatten": false
+  },
+  "games/poison_cloud": {
+    "flatten": false
+  },
+  "games/minion_blue": {
+    "flatten": false
+  },
+  "games/blitz_arm_far": {
+    "flatten": false
+  },
+  "games/blitz_body": {
+    "flatten": false
+  },
+  "games/blitz_head": {
+    "flatten": false
+  },
+  "games/blitz_arm_near": {
+    "flatten": false
+  },
+  "games/blitz_fist": {
+    "flatten": false
+  },
+  "games/blitz_link_rig_link": {
+    "flatten": false
+  },
+  "games/poro": {
+    "fillHoles": true
+  },
+  "games/gunny_chick": {
+    "fillHoles": "#FFFFFF"
+  },
+  "games/moly": {
+    "fillHoles": true
+  },
+  "games/elder_dragon": {
+    "fillHoles": true
+  },
+  "games/scuttle": {
+    "fillHoles": true
+  },
+  "games/elder_wing_far": {
+    "flatten": false,
+    "paper": false
+  },
+  "games/elder_body": {
+    "flatten": false,
+    "paper": false
+  },
+  "games/elder_wing_near": {
+    "flatten": false,
+    "paper": false
+  },
+  "vehicles/skaarl_body": {
+    "flatten": false,
+    "paper": false
+  },
+  "games/moly_body": {
+    "flatten": false,
+    "paper": false
+  },
+  "games/moly_arm_wave": {
+    "flatten": false,
+    "paper": false
+  },
+  "games/gunny_tree_tree": {
+    "flatten": false
+  },
+  "vehicles/skaarl_leg_back": {
+    "flatten": false,
+    "paper": false
+  },
+  "vehicles/skaarl_frill": {
+    "flatten": false,
+    "paper": false
+  },
+  "vehicles/skaarl_leg_front": {
+    "flatten": false,
+    "paper": false
+  },
+  "games/lu_gach": {
+    "flatten": false
+  },
+  "street/sparrow": {
+    "flatten": false
+  },
+  "street/sparrow_fly": {
+    "flatten": false
+  },
+  "street/power_pole_post": {
+    "flatten": false
+  },
+  "street/power_pole_loa_post": {
+    "flatten": false
+  },
+  "street/ad_khoan": {
+    "flatten": false
+  },
+  "street/ad_phong": {
+    "flatten": false
+  },
+  "street/ad_daykem": {
+    "flatten": false
+  },
+  "street/beer_glass": {
+    "flatten": false
+  },
+  "street/dieu_cay": {
+    "flatten": false
+  },
+  "vehicles/surfboard": {
+    "flatten": false
+  },
+  "crypto/candle_green": {
+    "flatten": false
+  },
+  "crypto/candle_red": {
+    "flatten": false
+  },
+  "crypto/coin": {
+    "flatten": false
+  },
+  "crypto/shark_fin": {
+    "flatten": false
+  },
+  "crypto/whirlpool": {
+    "flatten": false
+  },
+  "crypto/storm_cloud": {
+    "flatten": false
+  },
+  "crypto/feather": {
+    "flatten": false
+  },
+  "crypto/thought_tangle": {
+    "flatten": false
+  },
+  "crypto/buoy_nfa": {
+    "flatten": false
+  },
+  "crypto/buoy_wagmi": {
+    "flatten": false
+  },
+  "crypto/god_rays": {
+    "flatten": false
+  },
+  "crypto/puppet_hand": {
+    "fillHoles": true
+  },
+  "crypto/this_is_fine": {
+    "wobble": 4
+  },
+  "crypto/sad_pepe": {
+    "wobble": 4
+  },
+  "crypto/fine_flame_left": {
+    "flatten": false,
+    "paper": false
+  },
+  "crypto/fine_flame_right": {
+    "flatten": false,
+    "paper": false
+  },
+  "crypto/fine_dog": {
+    "flatten": false,
+    "paper": false
+  },
+  "crypto/fine_boat": {
+    "flatten": false,
+    "paper": false
+  },
+  "crypto/fine_bubble": {
+    "flatten": false,
+    "paper": false
+  },
+  "crypto/pepe_body": {
+    "flatten": false,
+    "paper": false
+  },
+  "crypto/pepe_head": {
+    "flatten": false,
+    "paper": false
+  },
+  "crypto/thought_tangle_1": {
+    "flatten": false
+  },
+  "crypto/thought_tangle_2": {
+    "flatten": false
+  },
+  "crypto/thought_tangle_3": {
+    "flatten": false
+  },
+  "crypto/thought_tangle_4": {
+    "flatten": false
+  },
+  "crypto/pill": {
+    "flatten": false
+  },
+  "crypto/storm_body": {
+    "flatten": false
+  },
+  "crypto/bolt": {
+    "flatten": false
+  },
+  "crypto/dharma_wheel": {
+    "flatten": false
+  },
+  "childhood/crt_tv_body": {
+    "flatten": false
+  },
+  "childhood/crt_tv_static_1": {
+    "flatten": false,
+    "paper": false
+  },
+  "childhood/crt_tv_static_2": {
+    "flatten": false,
+    "paper": false
+  },
+  "childhood/crt_tv_static_3": {
+    "flatten": false,
+    "paper": false
+  },
+  "childhood/crt_tv_static_4": {
+    "flatten": false,
+    "paper": false
+  },
+  "crypto/waves_back_1": {
+    "flatten": false,
+    "paper": false,
+    "tile": true
+  },
+  "crypto/waves_back_2": {
+    "flatten": false,
+    "paper": false,
+    "tile": true
+  },
+  "crypto/waves_back_3": {
+    "flatten": false,
+    "paper": false,
+    "tile": true
+  },
+  "crypto/waves_mid_1": {
+    "flatten": false,
+    "paper": false,
+    "tile": true
+  },
+  "crypto/waves_mid_2": {
+    "flatten": false,
+    "paper": false,
+    "tile": true
+  },
+  "crypto/waves_mid_3": {
+    "flatten": false,
+    "paper": false,
+    "tile": true
+  },
+  "crypto/waves_front_1": {
+    "flatten": false,
+    "paper": false,
+    "tile": true
+  },
+  "crypto/waves_front_2": {
+    "flatten": false,
+    "paper": false,
+    "tile": true
+  },
+  "crypto/waves_front_3": {
+    "flatten": false,
+    "paper": false,
+    "tile": true
+  },
+  "crypto/waves_dark_1": {
+    "flatten": false,
+    "paper": false,
+    "tile": true
+  },
+  "crypto/waves_dark_2": {
+    "flatten": false,
+    "paper": false,
+    "tile": true
+  },
+  "crypto/waves_dark_3": {
+    "flatten": false,
+    "paper": false,
+    "tile": true
+  },
+  "games/hp_frame": {
+    "flatten": false,
+    "paper": false
+  },
+  "games/hp_fill": {
+    "flatten": false,
+    "paper": false
+  },
+  "games/bolt_blue_1": {
+    "flatten": false,
+    "paper": false
+  },
+  "games/bolt_blue_2": {
+    "flatten": false,
+    "paper": false
+  },
+  "games/bolt_red_1": {
+    "flatten": false,
+    "paper": false
+  },
+  "games/bolt_red_2": {
+    "flatten": false,
+    "paper": false
+  },
+  "hero/dust_1": {
+    "flatten": false,
+    "paper": false
+  },
+  "hero/dust_2": {
+    "flatten": false,
+    "paper": false
+  },
+  "hero/dust_3": {
+    "flatten": false,
+    "paper": false
+  },
+  "hero/foam_1": {
+    "flatten": false,
+    "paper": false
+  },
+  "hero/foam_2": {
+    "flatten": false,
+    "paper": false
+  },
+  "hero/foam_3": {
+    "flatten": false,
+    "paper": false
+  }
+}

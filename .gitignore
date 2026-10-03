@@ -1,0 +1,7 @@
+node_modules
+dist
+# source art, references and moodboard photos (large, some personal): kept local
+raw_art/
+# Blender export (npm run export:blender), regenerated on demand
+blender/
+*.log

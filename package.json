@@ -1,0 +1,29 @@
+{
+  "name": "can-the-thoi",
+  "version": "0.1.0",
+  "description": "Cấn Thế Thôi — a notebook-paper scrolling portfolio",
+  "scripts": {
+    "dev": "vite --port 5175",
+    "build": "vite build",
+    "preview": "vite preview --port 5175",
+    "prep:art": "node scripts/prep_art.mjs",
+    "export:blender": "node scripts/export_blender.mjs"
+  },
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.1",
+    "gsap": "^3.15.0",
+    "normalize-wheel": "^1.0.1",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.1",
+    "sharp": "^0.35.5",
+    "vite": "^8.3.2"
+  },
+  "private": true
+}

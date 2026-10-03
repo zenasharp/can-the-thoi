@@ -1,0 +1,83 @@
+@font-face {
+  font-family: "Patrick Hand";
+  src: url("/fonts/PatrickHand-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+:root {
+  --paper-cream: #f4ede0;
+  --outline-ink: #1a1a1a;
+  --pencil-shadow: #8b7e6e;
+  --notebook-line: #b8c5d0;
+  --hand: "Patrick Hand", "Comic Sans MS", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+  background: var(--paper-cream);
+  color: var(--outline-ink);
+  font-family: var(--hand);
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: none;
+}
+
+/* Comic speech bubble rendered with drei <Html> above the hero. */
+.bubble {
+  position: relative;
+  min-width: 150px;
+  max-width: 240px;
+  padding: 10px 16px 12px;
+  font-family: var(--hand);
+  font-size: 19px;
+  line-height: 1.1;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--outline-ink);
+  transform: translate(-50%, -100%) rotate(-2deg);
+  pointer-events: none;
+  animation: bubble-pop 0.3s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+/* the hand-drawn outline (ScribbleBubble), behind the text */
+.bubble-ink {
+  position: absolute;
+  left: -8px;
+  top: -8px;
+  overflow: visible;
+  z-index: 0;
+  filter: drop-shadow(2px 3px 0 rgba(26, 26, 26, 0.18));
+}
+
+.bubble-text {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes bubble-pop {
+  from {
+    transform: translate(-50%, -88%) rotate(4deg) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.hint {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  font-size: 16px;
+  color: var(--pencil-shadow);
+  pointer-events: none;
+}

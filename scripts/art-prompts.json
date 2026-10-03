@@ -1,0 +1,386 @@
+{
+  "refs": [
+    "raw_art/_refs/sun.png",
+    "raw_art/_refs/tree.png",
+    "raw_art/_refs/teemo_hat.png"
+  ],
+  "items": {
+    "childhood/castle": {
+      "size": "1024x1536",
+      "subject": "a fairytale princess castle like the Disney castle: a pink block with three tall towers with blue cone roofs and one small arched door"
+    },
+    "childhood/cloud": {
+      "size": "1536x1024",
+      "subject": "one white puffy cloud with a sleepy dot-eyes smiling face"
+    },
+    "childhood/anywhere_door": {
+      "size": "1024x1536",
+      "subject": "Doraemon's Anywhere Door: a pink door in a pink frame, standing on its own, with a round yellow knob"
+    },
+    "childhood/totoro_bus_stop": {
+      "size": "1024x1536",
+      "subject": "Totoro from My Neighbor Totoro: a big round grey creature with a cream belly, pointy ears and a big grin, holding a green leaf over its head, next to a small round bus stop sign on a pole"
+    },
+    "childhood/soot_sprites": {
+      "size": "1536x1024",
+      "subject": "three Ghibli soot sprites: three fuzzy black balls with big white eyes, one holding a little yellow star"
+    },
+    "childhood/leaf_headband": {
+      "size": "1536x1024",
+      "subject": "Naruto's ninja headband lying flat: a long dark blue cloth strip with a grey metal plate in the middle showing a simple leaf swirl"
+    },
+    "childhood/perry": {
+      "size": "1024x1536",
+      "subject": "Perry the Platypus as Agent P standing upright: teal body, orange bill and feet, flat orange tail, a brown fedora, half-closed eyes"
+    },
+    "childhood/grass": {
+      "size": "1536x1024",
+      "subject": "a small tuft of green grass made of five pointy blades"
+    },
+    "street/school_gate": {
+      "size": "1536x1024",
+      "subject": "a Vietnamese school gate: two yellow pillars, a grey metal gate between them, a red arch sign on top with no text"
+    },
+    "street/honda_cub": {
+      "size": "1536x1024",
+      "subject": "a Honda Super Cub scooter, side view facing right: light blue body, cream leg shield, two black wheels, one round headlight"
+    },
+    "street/plastic_stools": {
+      "size": "1536x1024",
+      "subject": "two low red plastic stools side by side, one with a glass of iced tea on top"
+    },
+    "street/piggy_bank": {
+      "subject": "a Vietnamese clay piggy bank (heo đất): a round red pig with a small coin slot on its back and a cream flower painted on its side"
+    },
+    "adult/trading_screens": {
+      "subject": "nine computer monitors in a 3 by 3 grid on a desk, each dark screen showing one simple zigzag line, some green going up, some red going down"
+    },
+    "adult/candles": {
+      "size": "1536x1024",
+      "subject": "five big trading candlestick bars in a row: three green ones rising and two red ones, each a rectangle with a thin line through it"
+    },
+    "adult/frog": {
+      "subject": "a green frog in a blue T-shirt with sad droopy half-closed eyes and a tiny pink mouth, hands pressed together hopefully"
+    },
+    "adult/guitar": {
+      "size": "1024x1536",
+      "subject": "an acoustic guitar standing upright: brown body, one black round sound hole, a long dark neck"
+    },
+    "adult/music_notes": {
+      "size": "1536x1024",
+      "subject": "three bouncing music notes, one pink, one purple, one blue"
+    },
+    "adult/coin_stack": {
+      "subject": "a wobbly stack of yellow gold coins with a ₿ on the top coin, one coin falling off"
+    },
+    "vehicles/catbus": {
+      "size": "1536x1024",
+      "subject": "the Catbus from My Neighbor Totoro, side view facing right: a long orange-brown cat shaped like a bus, big grin, round yellow eyes, a few square windows along its body, many short legs"
+    },
+    "vehicles/bull": {
+      "size": "1536x1024",
+      "subject": "a charging green bull (the crypto bull market), side view facing right, big curved cream horns, a red saddle on its back, a small green arrow pointing up drawn on its side"
+    },
+    "vehicles/bear": {
+      "size": "1536x1024",
+      "subject": "a grumpy red bear walking on four legs (the crypto bear market), side view facing left, a small red arrow pointing down drawn on its side"
+    },
+    "vehicles/rocket": {
+      "size": "1024x1536",
+      "subject": "a cartoon rocket flying straight up: cream body, red nose cone and red fins, one round blue window, orange-yellow flame at the bottom"
+    },
+    "childhood/robo_strawberry": {
+      "refs": [
+        "raw_art/_refs/robo_apple.png"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: one 2D doodle cut-out for a notebook-paper website. The attached image is the artist's own drawing of a 'Robo Trai Cay' robot-fruit character. Draw ANOTHER character of the same family in EXACTLY the same style and construction: the same round lumpy blob body with a flat bottom, a big pink face patch (#FBC6BE) taking the upper-middle of the body, two small stubby rounded arms sticking out at the sides, the same thick near-black wobbly mouse-drawn outline (#151515) of constant width, flat solid colours only, no shading, no gradients, no highlights, no texture, very few lines. Face: simple marks only (dot eyes or X eyes, a short line or small mouth). Plain pure white background, centered, generous margin, no ground, no shadow, no text. Character: a red strawberry robot fruit (#E8352B body) with a few small yellow seed dots on the body and a green leafy crown on top, determined dot eyes with angry eyebrows."
+    },
+    "childhood/robo_orange": {
+      "refs": [
+        "raw_art/_refs/robo_apple.png"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: one 2D doodle cut-out for a notebook-paper website. The attached image is the artist's own drawing of a 'Robo Trai Cay' robot-fruit character. Draw ANOTHER character of the same family in EXACTLY the same style and construction: the same round lumpy blob body with a flat bottom, a big pink face patch (#FBC6BE) taking the upper-middle of the body, two small stubby rounded arms sticking out at the sides, the same thick near-black wobbly mouse-drawn outline (#151515) of constant width, flat solid colours only, no shading, no gradients, no highlights, no texture, very few lines. Face: simple marks only (dot eyes or X eyes, a short line or small mouth). Plain pure white background, centered, generous margin, no ground, no shadow, no text. Character: an orange robot fruit (#F5932A body) with one green leaf on top, surprised round dot eyes and a small open mouth."
+    },
+    "childhood/robo_grape": {
+      "refs": [
+        "raw_art/_refs/robo_apple.png"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: one 2D doodle cut-out for a notebook-paper website. The attached image is the artist's own drawing of a 'Robo Trai Cay' robot-fruit character. Draw ANOTHER character of the same family in EXACTLY the same style and construction: the same round lumpy blob body with a flat bottom, a big pink face patch (#FBC6BE) taking the upper-middle of the body, two small stubby rounded arms sticking out at the sides, the same thick near-black wobbly mouse-drawn outline (#151515) of constant width, flat solid colours only, no shading, no gradients, no highlights, no texture, very few lines. Face: simple marks only (dot eyes or X eyes, a short line or small mouth). Plain pure white background, centered, generous margin, no ground, no shadow, no text. Character: a purple grape robot fruit (#8E4FC4 body) with a short brown stem and a curly green tendril on top, sleepy half-closed eyes."
+    },
+    "childhood/robo_pineapple": {
+      "refs": [
+        "raw_art/_refs/robo_apple.png"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: one 2D doodle cut-out for a notebook-paper website. The attached image is the artist's own drawing of a 'Robo Trai Cay' robot-fruit character. Draw ANOTHER character of the same family in EXACTLY the same style and construction: the same round lumpy blob body with a flat bottom, a big pink face patch (#FBC6BE) taking the upper-middle of the body, two small stubby rounded arms sticking out at the sides, the same thick near-black wobbly mouse-drawn outline (#151515) of constant width, flat solid colours only, no shading, no gradients, no highlights, no texture, very few lines. Face: simple marks only (dot eyes or X eyes, a short line or small mouth). Plain pure white background, centered, generous margin, no ground, no shadow, no text. Character: a yellow pineapple robot fruit (#F6CE2B body) with a spiky green pineapple crown on top and a purple headband across the forehead, big grin."
+    },
+    "childhood/robo_peach": {
+      "refs": [
+        "raw_art/_refs/robo_apple.png"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: one 2D doodle cut-out for a notebook-paper website. The attached image is the artist's own drawing of a 'Robo Trai Cay' robot-fruit character. Draw ANOTHER character of the same family in EXACTLY the same style and construction: the same round lumpy blob body with a flat bottom, a big pink face patch (#FBC6BE) taking the upper-middle of the body, two small stubby rounded arms sticking out at the sides, the same thick near-black wobbly mouse-drawn outline (#151515) of constant width, flat solid colours only, no shading, no gradients, no highlights, no texture, very few lines. Face: simple marks only (dot eyes or X eyes, a short line or small mouth). Plain pure white background, centered, generous margin, no ground, no shadow, no text. Character: a pink peach robot fruit (#F49AB8 body) with two small green leaves on top, happy closed eyes like upside-down U shapes, blush dots."
+    },
+    "childhood/fruit_tree": {
+      "size": "1024x1536",
+      "refs": [
+        "raw_art/_refs/tree.png",
+        "raw_art/_refs/sun.png"
+      ],
+      "subject": "a big wide tree: a thick brown trunk that splits into three short branches at the top, and one huge cloud-shaped canopy filled COMPLETELY with one flat solid green colour (#74B562) right to its edges, outlined in thick black, a few short bare brown twigs poking out under the bottom edge of the canopy. NO fruit, NO holes, NO white or blurry areas in the canopy"
+    },
+    "vehicles/time_machine": {
+      "size": "1536x1024",
+      "subjectRef": "raw_art/_refs/subjects/time_machine.png",
+      "subject": "Doraemon's time machine seen from the side, facing right: a long flat blue flying platform like a carpet, a cream control console box with a few vent lines, a pink seat at the back, two rounded blue tanks on the deck, a tall thin curved cream lamp post at the front with a red-and-green checkered lamp head, three little levers with red knobs"
+    },
+    "childhood/flower_tulip": {
+      "subject": "one red tulip flower on a green stem with two leaves"
+    },
+    "childhood/flower_daisy": {
+      "subject": "one white daisy flower with a yellow centre on a green stem with one leaf"
+    },
+    "childhood/flower_bunch": {
+      "size": "1536x1024",
+      "subject": "a small low clump of three tiny flowers, one pink, one yellow, one blue, with a few green leaves"
+    },
+    "childhood/probe": {
+      "size": "1536x1024",
+      "subjectRef": "raw_art/_refs/subjects/probe.png",
+      "subject": "Probe, the purple flying robot from Bakugan: a wide purple dome-shaped saucer body, two angry red slit eyes on the dome, a band of white zig-zag teeth around its middle, a thin antenna on top, two short arms with hexagon-shaped claw hands"
+    },
+    "childhood/bakugan_ball": {
+      "subjectRef": "raw_art/_refs/subjects/bakugan.png",
+      "subject": "a closed red Bakugan ball: a red sphere built from a few big curved panels, with an orange flame-shaped mark on the front"
+    },
+    "childhood/drago": {
+      "size": "1536x1024",
+      "subjectRef": "raw_art/_refs/subjects/drago.png",
+      "subject": "Drago, the red Bakugan dragon, flying with both big wings spread wide: red body, tan belly, large tan wings with a few dark red rib lines, a golden curved horn on the head, a long red tail"
+    },
+    "childhood/up_house": {
+      "size": "1024x1536",
+      "refs": [
+        "raw_art/_refs/subjects/up_house_flying.png",
+        "raw_art/_refs/subjects/up_house_front.png",
+        "raw_art/_refs/sun.png",
+        "raw_art/_refs/tree.png"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: one 2D doodle cut-out for a notebook-paper website. The FIRST TWO attached images show WHAT to draw: Carl's flying house from the Pixar movie Up. The LAST TWO attached images are the artist's own drawings and show HOW to draw it: thick near-black wobbly mouse-drawn outline (#151515) of constant width, flat solid colours, no shading, no gradients, no highlights, no texture. Draw the house exactly as in the movie: a narrow old two-storey Victorian wooden house seen from the front-left; on the right a tall steep pointed front gable painted yellow with a scalloped-shingle pattern and one tall window with pink trim, below it a lime-green bay window with pink window frames; on the left a peach-orange porch with a small railing and a red-brown front door, and a small yellow dormer with pink trim on the roof; blue siding on the side wall; dark brown shingled roof; a red brick chimney. Above the house a HUGE round cloud-shaped cluster of many small round balloons in pink, red, orange, yellow, green, blue and purple, tied by many thin straight strings that converge on the chimney. The balloon cluster is about twice as big as the house. Composition: house hanging under the balloons, whole thing centered, fully visible, generous margin. Plain pure white background, no sky, no ground, no shadow, no text."
+    },
+    "childhood/perry_normal": {
+      "subjectRef": "raw_art/_refs/subjects/perry_normal.png",
+      "subject": "a plain pet platypus standing on all four legs, side view facing right: turquoise body, big round googly eyes looking in different directions, flat orange duck bill, small orange feet, flat orange beaver tail"
+    },
+    "childhood/perry_agent": {
+      "size": "1024x1536",
+      "subjectRef": "raw_art/_refs/subjects/perry_agent.png",
+      "subject": "the same turquoise platypus now standing upright on two legs as a secret agent, wearing a brown fedora hat, cool half-closed eyes, flat orange bill, orange feet, flat orange tail, one fist raised"
+    },
+    "childhood/oggy_house": {
+      "size": "1536x1024",
+      "subjectRef": "raw_art/_refs/subjects/oggy_house.png",
+      "subject": "Oggy's house from Oggy and the Cockroaches: a cream one-storey house with a purple roof and a small upper room on top, rainbow-striped awnings over the windows, a teal front door between two thin columns, a teal garage door with white diamond shapes"
+    },
+    "childhood/pf_house": {
+      "size": "1536x1024",
+      "subjectRef": "raw_art/_refs/subjects/pf_house.png",
+      "subject": "Phineas and Ferb's house: a yellow wooden house with a big brown roof, two dormer windows, a red brick chimney, brown window shutters, a small red round-topped front door, and one tall dark green cypress tree beside it"
+    },
+    "hero/hero_childhood": {
+      "size": "1024x1536",
+      "refs": [
+        "raw_art/_old/hero_childhood_v1.png"
+      ],
+      "prompt": "TRACE the attached drawing exactly: keep the same character, same pose, same face (two dot eyes, U smile), same black hair shape, same yellow bamboo-copter on top of the head, same white school shirt with collar and buttons, same red scarf, same mint shorts, same cream feet, same thick black mouse-drawn outline and flat colours. Do NOT restyle, do NOT add shading, do NOT add detail lines, do NOT change proportions. Plain white background. Only change: tie Naruto's Hidden Leaf ninja headband around the forehead, just under the hair: a dark blue cloth band with a grey metal plate in the middle showing a simple leaf swirl, drawn in the same chunky flat style with few lines."
+    },
+    "vehicles/skaarl": {
+      "size": "1536x1024",
+      "refs": [
+        "raw_art/_refs/game/skaarl_d.png",
+        "raw_art/_refs/game/skaarl_e.png",
+        "raw_art/_refs/game/skaarl_b.png",
+        "raw_art/_refs/sun.png",
+        "raw_art/_refs/tree.png"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: one 2D doodle cut-out for a notebook-paper website. Draw SKAARL, the lizard mount of Kled from League of Legends, in a strict SIDE VIEW facing RIGHT, running on its two hind legs like a small raptor, with NO rider. Images 1, 2 and 3 show what Skaarl looks like (image 1 is a side view in flight, image 2 shows its head frills, image 3 its colours): keep its identity exactly. A big frog-like head with an ENORMOUS wide grinning mouth full of small sharp teeth and a pink tongue, ONE huge bulging yellow eye with a black pupil on top of the head, two large bat-ear-shaped frills sticking up and back from the back of the head (orange membrane, teal ribs and teal rims), a row of teal spiky fins along the top of the head, neck and back, an orange-yellow scaly body with teal-blue scale patches on the back, a pale cream belly, small clawed front arms, two strong dark maroon-red hind legs with three dark claws, a long thick tail held straight out behind with teal fins on top, and a small brown leather saddle with a strap on its back. Panicky comical face. Images 4 and 5 are the artist own drawings: a STYLE REFERENCE ONLY, do not copy their subjects. Draw it the way this artist would: simple and chunky, like a quick mouse drawing in MS Paint, big flat shapes, one thick near-black outline (#151515) of constant width, slightly jittery and lumpy, flat solid fills, NO shading, NO highlights, NO gradients, NO texture, few interior lines. The whole creature centered and fully visible with a generous margin. Background: plain pure white, no ground, no shadow, no border, no text."
+    },
+    "games/infinity_edge": {
+      "size": "1536x1024",
+      "subjectRef": "raw_art/_refs/game/infinity_edge_a.png",
+      "subject": "Infinity Edge, the great sword from League of Legends, lying horizontally with the tip pointing LEFT: a very broad golden blade shaped like a long arrowhead with a sharp hooked tip, a dark olive inlay down the middle of the blade with yellow glowing runes, a short golden cross-guard with two curved prongs, a short wrapped grip and a pointed golden pommel"
+    },
+    "games/scuttle": {
+      "size": "1536x1024",
+      "subjectRef": "raw_art/_refs/game/scuttle_a.png",
+      "subject": "the Rift Scuttler (scuttle crab) from League of Legends, cute version, side view: a rounded sage-green shell like a beetle dome, two long curved antennae with yellow tips sweeping back, a small grumpy sleepy face with half-closed eyes and a small frown on the front, several short pointed legs underneath scuttling"
+    },
+    "games/turret_red": {
+      "size": "1024x1536",
+      "subjectRef": "raw_art/_refs/game/turret_b.png",
+      "subject": "a cute cartoon League of Legends tower (turret): a tall dark slate-grey stone pillar on a round base, an armoured top like a big rounded knight helmet in blue-grey with gold trim, two hanging RED banners on the sides, and a glowing red crystal flame floating on a short gold stem at the front"
+    },
+    "games/elder_dragon": {
+      "size": "1536x1024",
+      "subjectRef": "raw_art/_refs/game/elder_a.png",
+      "refs": [
+        "raw_art/_refs/game/elder_b.png",
+        "raw_art/_refs/sun.png",
+        "raw_art/_refs/tree.png"
+      ],
+      "subject": "the Elder Dragon from League of Legends, flying high with both huge wings spread, side view facing LEFT: a long dark navy-black scaly dragon, a crown of pale grey spikes around its head and neck, glowing cyan-teal eyes and glowing teal tips on its claws, wing fingers and spines, big tattered bat wings, a long whip tail"
+    },
+    "games/poro": {
+      "subjectRef": "raw_art/_refs/game/poro_a.png",
+      "subject": "a Poro from League of Legends: a round fluffy pale blue-white furball with a shaggy fringe, two small curved brown horns, two black dot eyes, a big open happy mouth with a pink tongue hanging out, tiny grey paws. The fur is ONE flat pale colour with only a few ink tufts at the edge: NO grey smudges, NO shading, NO texture on the body"
+    },
+    "games/gunny_chick": {
+      "subjectRef": "raw_art/_refs/game/gunny_a.png",
+      "subject": "the Gunny mascot from the Vietnamese game Gunny: a round fat yellow chick standing, huge round white eyes with small black pupils, a small orange beak, tiny orange feet, little wings, a tuft of feathers on top, looking surprised and cheerful"
+    },
+    "games/moly": {
+      "size": "1024x1536",
+      "subjectRef": "raw_art/_refs/game/moly_a.png",
+      "subject": "Moly, the mole mascot from the Vietnamese kids game Moly (Vuong quoc chuot chui), standing and waving one hand: a round light-blue head with a cream face, a big shiny red round nose, two black eyes, an open smile with two buck teeth, a red scarf around the neck, an orange vest with yellow buttons, brown trousers with a big gold belt buckle, white gloves, big dark brown shoes"
+    },
+    "games/moly_sit": {
+      "size": "1024x1024",
+      "refs": [
+        "raw_art/_refs/game/moly_a.png",
+        "raw_art/games/moly.png",
+        "raw_art/_refs/sun.png",
+        "raw_art/_refs/tree.png"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: one 2D doodle cut-out for a notebook-paper website. Draw MOLY, the mole mascot of the Vietnamese kids game Moly (Vuong quoc chuot chui). Image 1 is the official Moly and image 2 a drawing of him in the right style: keep his identity exactly: a gumdrop-shaped light-blue head that merges into the body with no neck, a big cream oval face patch over the cheeks and mouth, two small black oval eyes close together, a big shiny round red nose in the middle of the face, a wide happy open smile WITHOUT any teeth (no buck teeth), a red scarf around the neck, an orange vest with yellow buttons over a white shirt, light-blue arms with big white four-finger gloves, brown trousers with a big gold round belt buckle, big dark brown shoes. POSE: he SITS on the ground facing the viewer, both legs stretched out forward with the shoe soles towards the viewer; his LEFT arm (on the right side of the picture) is raised high beside his head in a big wave hello, with clear empty white paper between that raised arm and his head; his other glove rests on his knee. Images 3 and 4 are the artist own drawings: a STYLE REFERENCE ONLY. Draw it the way this artist would: simple and chunky, like a quick mouse drawing in MS Paint, big flat shapes, one thick near-black outline (#151515), slightly jittery, flat solid fills, NO shading, NO highlights except one small white shine on the nose, NO gradients. Centered, fully visible, generous margin. Background: plain pure white, no ground, no shadow, no text."
+    },
+    "hero/hero_street": {
+      "size": "1024x1536",
+      "refs": [
+        "raw_art/hero/hero_base.png",
+        "raw_art/_refs/street/jacket.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: a 2D doodle cut-out character for a notebook-paper website. TRACE the FIRST image exactly: the same chibi boy with the same face, eyes, smile, black hair, ears, head size, body proportions, front-facing standing pose with both arms hanging down at his sides, the same light mint shorts, legs and feet, and the same thick slightly jittery near-black outline and flat colour style. Do NOT restyle, do NOT change the face or the hair, do NOT change the pose. Change ONLY his top: he now wears the Vietnamese school windbreaker jacket from the SECOND image (a photo of the real jacket laid flat), with exactly its colour layout: the WHITE part is large: it covers the whole upper chest, both shoulders and the UPPER HALF of both sleeves; its lower edge is one big V shape that runs from each upper arm diagonally down to the middle of the chest, drawn as TWO parallel stripes (a royal-blue stripe, then a white stripe under it) that continue across the sleeves. Below that V, the lower half of the jacket body AND the lower half of both sleeves down to the cuffs are royal blue (#2350D8). A white zipper runs straight down the middle; a white stand-up collar with blue lining; a small round school badge on his left upper sleeve. Around his neck, over the jacket collar, he still wears the red Young Pioneer scarf (khan quang do) tied in a knot with its two ends hanging down the front, as in the first image. Flat solid fills, no shading, no gradients, no texture. Plain pure white background, no ground, no shadow, no text."
+    },
+    "street/suzuki_viva": {
+      "size": "1536x1024",
+      "subjectRef": "raw_art/_refs/street/mood_a.png",
+      "subject": "a Suzuki Viva underbone motorbike (the classic Vietnamese street moped in the first image), strict SIDE VIEW facing RIGHT: a dark teal-blue body with a slim front leg shield, a long flat black seat, a side panel with an orange-yellow stripe decal and the word SUZUKI, a small headlight cowl with an orange indicator, chrome handlebars and mirrors, a silver exhaust pipe, black spoked wheels with grey rims, a side stand; NO rider",
+      "text": "SUZUKI"
+    },
+    "street/banh_mi_cart": {
+      "size": "1024x1024",
+      "subject": "a Vietnamese banh mi street cart, side view: a glass display cabinet with an aluminium frame on a small cart with two wheels and a handle, golden baguettes stacked inside the glass, the words BÁNH MÌ in big red letters on the glass, a small striped red-and-white umbrella on a pole above it, a little stool next to it",
+      "text": "BÁNH MÌ"
+    },
+    "street/house_a": {
+      "size": "1024x1536",
+      "subject": "a narrow tall Vietnamese tube house (nha ong) seen from the front, 3 floors and a flat roof with a small water tank: mustard yellow walls, the ground floor is a little grocery shop with a half-open grey roller shutter and a red shop sign board, the upper floors have a balcony with an iron railing and potted green plants, tall green louvered windows, one air-conditioner box on the wall. Flat FRONT ELEVATION view, no perspective, the facade drawn straight on.",
+      "text": "TẠP HOÁ"
+    },
+    "street/house_b": {
+      "size": "1024x1536",
+      "subject": "a narrow tall Vietnamese tube house (nha ong) seen from the front, 4 floors: mint green walls, the ground floor is a pho noodle shop with an open front and a white sign board, a balcony with a white railing and hanging laundry on the second floor, blue louvered windows, a little triangle roof on top. Flat FRONT ELEVATION view, no perspective, the facade drawn straight on.",
+      "text": "PHỞ"
+    },
+    "street/house_c": {
+      "size": "1024x1536",
+      "subject": "a narrow tall Vietnamese tube house (nha ong) seen from the front, 3 floors: pink walls, the ground floor with a folding metal gate and a blue sign board of a barber shop, a balcony on each upper floor full of potted plants and flowers, brown wooden windows, a rooftop with a small stainless water tank and a TV antenna. Flat FRONT ELEVATION view, no perspective, the facade drawn straight on.",
+      "text": "CẮT TÓC"
+    },
+    "street/house_d": {
+      "size": "1024x1536",
+      "subject": "a narrow tall Vietnamese tube house (nha ong) seen from the front, 3 floors: light blue walls, the ground floor is a motorbike repair shop with an open grey roller shutter, a yellow sign board and a few tyres stacked by the door, a narrow balcony with an iron railing, white windows with iron bars, a red tiled little roof on top. Flat FRONT ELEVATION view, no perspective, the facade drawn straight on.",
+      "text": "SỬA XE"
+    },
+    "street/house_e": {
+      "size": "1024x1536",
+      "subject": "a narrow tall Vietnamese tube house (nha ong) seen from the front, 3 floors: cream walls, the ground floor is a small coffee shop with a green striped awning, a brown sign board and two tiny plastic stools by the door, a balcony with a black iron railing and a hanging plant, wooden shutters, a flat roof with a few plants. Flat FRONT ELEVATION view, no perspective, the facade drawn straight on.",
+      "text": "CÀ PHÊ"
+    },
+    "street/house_f": {
+      "size": "1024x1536",
+      "subject": "a narrow tall Vietnamese tube house (nha ong) seen from the front, 4 floors: orange walls, the ground floor is a photocopy and stationery shop near a school with an open glass door, a white sign board with red letters, notebooks and pens in the window, balconies with white railings and potted plants on the upper floors, square windows, a small rooftop water tank. Flat FRONT ELEVATION view, no perspective, the facade drawn straight on.",
+      "text": "PHOTO"
+    },
+    "street/beer_table": {
+      "size": "1536x1024",
+      "subject": "a Vietnamese sidewalk beer corner (bia via he), seen from the side and a little from the front: one low square blue plastic table with four tiny plastic stools around it (two red, two blue), on the table top only a plate of roasted peanuts, a small metal bucket of ice and two brown beer bottles with plain yellow labels and no brand; NO glasses and NO cups on the table, and plenty of free space on the table top; a red plastic beer crate on the ground beside it; no people"
+    },
+    "crypto/whale": {
+      "size": "1536x1024",
+      "subject": "a huge blue whale, side view facing RIGHT, the whole body visible: a big round head, a small eye with a smug sly half-closed look and a little smirk, a pale belly with a few groove lines, a blowhole on top of the head, a small side fin and a big tail fluke raised at the left end; a crypto market whale"
+    },
+    "crypto/puppet_hand": {
+      "size": "1024x1024",
+      "subject": "a huge sinister pale grey hand reaching DOWN from the top edge of the picture, palm facing down, the five fingers spread apart and slightly curled like a puppeteer working a marionette, at the top a black suit sleeve with a white shirt cuff and a gold cufflink; NO strings, NO puppet, nothing below the fingers"
+    },
+    "crypto/anglerfish": {
+      "size": "1536x1024",
+      "subject": "a deep-sea anglerfish, side view facing LEFT: a dark navy round body, an enormous open mouth full of jagged white teeth, a small mean yellow eye, small fins, and a long thin antenna arching forward from the top of its head ending in a glowing yellow bulb; from the bulb hangs a tiny sign that reads 100x GEM",
+      "text": "100x GEM"
+    },
+    "crypto/nft_ape": {
+      "size": "1024x1024",
+      "subject": "a heavy ornate gold picture frame holding a chunky pixel-art portrait of a bored cartoon ape with half-closed sleepy eyes wearing a little cap, on a flat light blue background inside the frame; a red price tag on a string hangs from the bottom corner of the frame and reads -99%",
+      "text": "-99%"
+    },
+    "crypto/this_is_fine": {
+      "size": "1536x1024",
+      "subject": "the This is fine meme as a side view scene: a calm cartoon dog wearing a small brown bowler hat sits on a little stool holding a coffee mug, inside a small wooden rowing boat; big orange flames rise from the boat around him; a small speech bubble near his head says this is fine.",
+      "text": "this is fine."
+    },
+    "crypto/sad_pepe": {
+      "size": "1024x1024",
+      "refs": [
+        "raw_art/_old/crypto_v2/sad_pepe_phone.png",
+        "raw_art/_refs/sun.png",
+        "raw_art/_refs/tree.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: a 2D doodle cut-out for a notebook-paper website. TRACE the FIRST image: the same sad green meme frog (same head shape, the same big droopy eyes with heavy lids, the same wide lips, the same green colours) sitting in the same orange and white striped life ring, in the same drawing style with the same thick jittery near-black outline and flat fills. Changes: (1) NO phone: he holds nothing, both his hands rest on top of the life ring in front of him; (2) NO tears anywhere on his face; his face just looks sad and tired. Do NOT add anything else. Keep the composition: the frog and the ring alone, centered, fully visible. Background: plain pure white, no water, no shadow, no text."
+    },
+    "crypto/one_wing": {
+      "size": "1024x1536",
+      "subjectRef": "raw_art/_refs/crypto/one_wing_ref.png",
+      "subject": "ONE single huge black feathered angel wing, the one-winged angel wing from the first image, alone with no character: its root (where it attaches to a back) is at the LOWER RIGHT of the picture; from there it rises up and arches over to the left and then sweeps down in long layered black and charcoal grey feathers that hang down to the lower left; big long primary feathers at the bottom edge"
+    },
+    "crypto/cabal_boat": {
+      "size": "1536x1024",
+      "subject": "a sleek black speedboat, strict side view facing RIGHT, with a small cabin with dark tinted windows; on its open deck five mysterious figures in black hooded robes huddle around a small table with a laptop and a pile of gold coins; their faces are completely dark inside the hoods except for two small glowing red dots for eyes each; a small black flag on a pole at the back; the dark hull has the word CABAL painted on its side in white letters",
+      "text": "CABAL"
+    },
+    "hero/hero_adult": {
+      "size": "1024x1536",
+      "refs": [
+        "raw_art/hero/hero_base.png",
+        "raw_art/_refs/crypto/jacket_teal.png",
+        "raw_art/_old/crypto_v1/hero_adult_guitar.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: a 2D doodle cut-out character for a notebook-paper website. TRACE the FIRST image exactly: the same chibi boy with the same face, eyes, smile, black hair, ears, head size, body proportions, front-facing standing pose with both arms hanging down at his sides, the same light mint shorts, legs and feet, and the same thick slightly jittery near-black outline and flat colour style. Do NOT restyle, do NOT change the face or the hair, do NOT change the pose. Changes: (1) he wears black over-ear headphones on his head, with the band over the top of his hair, exactly like in the THIRD image; (2) NO red scarf, NO guitar, nothing in his hands; (3) his top is the windbreaker jacket from the SECOND image (a photo of the real jacket laid flat), with exactly its colour layout: a WHITE jacket; one wide TEAL (#1E9A9A) chevron band that makes a big V across the chest, running from each sleeve diagonally down to the zipper in the middle; a teal stand-up collar; teal ribbed cuffs and a teal ribbed waistband; a white zipper straight down the middle; two small teal slanted pocket slits low on the front; the jacket is zipped up and comes down over the top of his shorts. Flat solid fills, no shading, no gradients, no texture. Plain pure white background, no ground, no shadow, no text."
+    },
+    "crypto/dove_1": {
+      "size": "1024x1024",
+      "refs": [
+        "raw_art/_refs/crypto/dove_b.png",
+        "raw_art/_refs/sun.png",
+        "raw_art/_refs/tree.png"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: one frame of a flip-book animation for a notebook-paper website. TRACE the FIRST image exactly: the same cartoon white dove of peace in exactly the same pose (both wings raised high above its back), flying to the RIGHT, holding in its orange beak a thin red ribbon that curls into a round red spiral just in front of its head and hangs down a little below the beak. Keep its exact outline, the wing and tail feathers, the small round black eye and the position of every feature; do NOT change the pose, do NOT add anything. Draw it the way the other attached images (the artist own drawings, a STYLE REFERENCE ONLY) are drawn: one thick slightly jittery near-black outline, flat fills: the body very pale blue-white (#EAF3FA) with a few light blue (#A9CBE6) feather lines, orange beak, red ribbon. Nothing else: the dove alone, centered, fully visible, generous margin. Background: plain pure white, no sky, no ground, no shadow, no text."
+    },
+    "crypto/dove_2": {
+      "size": "1024x1024",
+      "refs": [
+        "raw_art/_refs/crypto/dove_a.png",
+        "raw_art/_refs/sun.png",
+        "raw_art/_refs/tree.png"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: one frame of a flip-book animation for a notebook-paper website. TRACE the FIRST image exactly: the same cartoon white dove of peace in exactly the same pose (wings spread out level behind it), flying to the RIGHT, holding in its orange beak a thin red ribbon that curls into a round red spiral just in front of its head and hangs down a little below the beak. Keep its exact outline, the wing and tail feathers, the small round black eye and the position of every feature; do NOT change the pose, do NOT add anything. Draw it the way the other attached images (the artist own drawings, a STYLE REFERENCE ONLY) are drawn: one thick slightly jittery near-black outline, flat fills: the body very pale blue-white (#EAF3FA) with a few light blue (#A9CBE6) feather lines, orange beak, red ribbon. Nothing else: the dove alone, centered, fully visible, generous margin. Background: plain pure white, no sky, no ground, no shadow, no text."
+    },
+    "crypto/dove_3": {
+      "size": "1024x1024",
+      "refs": [
+        "raw_art/_refs/crypto/dove_c.png",
+        "raw_art/_refs/sun.png",
+        "raw_art/_refs/tree.png"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: one frame of a flip-book animation for a notebook-paper website. TRACE the FIRST image exactly: the same cartoon white dove of peace in exactly the same pose (both wings swept down below its body), flying to the RIGHT, holding in its orange beak a thin red ribbon that curls into a round red spiral just in front of its head and hangs down a little below the beak. Keep its exact outline, the wing and tail feathers, the small round black eye and the position of every feature; do NOT change the pose, do NOT add anything. Draw it the way the other attached images (the artist own drawings, a STYLE REFERENCE ONLY) are drawn: one thick slightly jittery near-black outline, flat fills: the body very pale blue-white (#EAF3FA) with a few light blue (#A9CBE6) feather lines, orange beak, red ribbon. Nothing else: the dove alone, centered, fully visible, generous margin. Background: plain pure white, no sky, no ground, no shadow, no text."
+    }
+  }
+}
